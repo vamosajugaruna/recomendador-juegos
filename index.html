@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recomendador de Juegos de Mesa</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    h1 { color: #c0392b; }
+    .filtros label { margin-right: 1rem; display: inline-block; min-width: 120px; }
+    .juego { border: 1px solid #ccc; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; background: #f9f9f9; }
+    .filtros select, .filtros input { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>🎲 Recomendador de Juegos de Mesa</h1>
+  <div class="filtros">
+    <label>Tipo:
+      <select id="tipo"></select>
+    </label>
+    <label>Edad mínima:
+      <input type="number" id="edad">
+    </label>
+    <label>Duración máxima (min):
+      <input type="number" id="duracion">
+    </label>
+    <label>Número de jugadores:
+      <input type="number" id="jugadores">
+    </label>
+    <label>Precio máximo (€):
+      <input type="number" id="precio">
+    </label>
+    <button onclick="filtrar()">Filtrar</button>
+  </div>
+  <div id="resultados"></div>
+
+  <script>
+    const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaDcodFVtZv0w9a_K9Kkw04dR4Xmzxf20usc3S3VlZmjv8XmEu6Pw/pub?gid=1139506582&single=true&output=csv";
+    let juegos = [];
+
+    function cargarDatos() {
+      fetch(URL_CSV)
+        .then(res => res.text())
+        .then(data => {
+          const rows = data.trim().split('\n');
+          const headers = rows[0].split(',');
+          juegos = rows.slice(1).map(row => {
+            const values = row.split(',');
+            let juego = {};
+            headers.forEach((h, i) => juego[h.trim()] = values[i]?.trim());
+            return juego;
+          });
+          rellenarFiltros();
+          mostrarJuegos(juegos);
+        });
+    }
+
+    function rellenarFiltros() {
+      const tipos = [...new Set(juegos.map(j => j.Tipo))].sort();
+      const tipoSelect = document.getElementById("tipo");
+      tipoSelect.innerHTML = `<option value="">(Cualquiera)</option>` + tipos.map(t => `<option value="${t}">${t}</option>`).join('');
+    }
+
+    function filtrar() {
+      const tipo = document.getElementById("tipo").value;
+      const edad = parseInt(document.getElementById("edad").value);
+      const duracion = parseInt(document.getElementById("duracion").value);
+      const jugadores = parseInt(document.getElementById("jugadores").value);
+      const precio = parseFloat(document.getElementById("precio").value);
+
+      const filtrados = juegos.filter(j => {
+        const matchTipo = !tipo || j.Tipo === tipo;
+        const matchEdad = !edad || parseInt(j["Edad mínima"]) <= edad;
+        const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
+        const matchJugadores = !jugadores || (parseInt(j["Jugadores mínimos"]) <= jugadores && parseInt(j["Jugadores máximos"]) >= jugadores);
+        const matchPrecio = !precio || parseFloat(j["Precio"]) <= precio;
+        return matchTipo && matchEdad && matchDuracion && matchJugadores && matchPrecio;
+      });
+
+      mostrarJuegos(filtrados);
+    }
+
+    function mostrarJuegos(lista) {
+      const div = document.getElementById("resultados");
+      div.innerHTML = lista.map(j => `
+        <div class="juego">
+          <strong>${j.Nombre}</strong><br>
+          Tipo: ${j.Tipo} | Edad: ${j["Edad mínima"]}+ | Duración: ${j["Duración mínima"]}-${j["Duración máxima"]} min<br>
+          Jugadores: ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]} | Editorial: ${j.Editorial} | Precio: ${j["Precio"]} €
+        </div>`).join('') || "<p>No se encontraron juegos con esos criterios.</p>";
+    }
+
+    cargarDatos();
+  </script>
+</body>
+</html>
