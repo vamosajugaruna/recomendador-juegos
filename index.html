@@ -21,6 +21,9 @@
     <label>Edad mínima:
       <input type="number" id="edad">
     </label>
+    <label>Duración mínima (min):
+      <input type="number" id="duracionMin">
+    </label>
     <label>Duración máxima (min):
       <input type="number" id="duracion">
     </label>
@@ -78,6 +81,7 @@
     function filtrar() {
       const tipo = document.getElementById("tipo").value;
       const edad = parseInt(document.getElementById("edad").value);
+      const duracionMin = parseInt(document.getElementById("duracionMin").value);
       const duracion = parseInt(document.getElementById("duracion").value);
       const jugadores = parseInt(document.getElementById("jugadores").value);
       const precio = parseFloat(document.getElementById("precio").value);
@@ -87,12 +91,13 @@
       const filtrados = juegos.filter(j => {
         const matchTipo = !tipo || j.Tipo === tipo;
         const matchEdad = !edad || parseInt(j["Edad mínima"]) <= edad;
+        const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
         const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
         const matchJugadores = !jugadores || (parseInt(j["Jugadores mínimos"]) <= jugadores && parseInt(j["Jugadores máximos"]) >= jugadores);
         const matchPrecio = !precio || parseFloat(j["Precio"]) <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j.Clasificacion === clasificacion;
-        return matchTipo && matchEdad && matchDuracion && matchJugadores && matchPrecio && matchModalidad && matchClasificacion;
+        return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadores && matchPrecio && matchModalidad && matchClasificacion;
       });
 
       mostrarJuegos(filtrados);
