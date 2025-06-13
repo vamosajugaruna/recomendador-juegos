@@ -43,7 +43,7 @@
       <select id="clasificacion"></select>
     </label>
     <label>Precio máximo (€):
-      <input type="number" id="precio">
+      <input type="number" id="precio" step="0.01">
     </label>
     <button onclick="filtrar()">Filtrar</button>
   </div>
@@ -118,13 +118,16 @@
 
     function mostrarJuegos(lista) {
       const div = document.getElementById("resultados");
-      div.innerHTML = lista.map(j => `
+      div.innerHTML = lista.map(j => {
+        const precio = parseFloat(j["Precio"].replace(/[^\d.,]/g, '').replace(',', '.'));
+        return `
         <div class="juego">
           <strong>${j.Nombre}</strong><br>
           Tipo: ${j.Tipo} | Edad: ${j["Edad mínima"]}+ | Duración: ${j["Duración mínima"]}-${j["Duración máxima"]} min<br>
           Jugadores: ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]} | Editorial: ${j.Editorial} | Modalidad: ${j.Modalidad}<br>
-          Clasificación: ${j["Clasificación"]} | Precio: ${j["Precio"]}
-        </div>`).join('') || "<p>No se encontraron juegos con esos criterios.</p>";
+          Clasificación: ${j["Clasificación"]} | Precio: ${precio.toFixed(2)} €
+        </div>`;
+      }).join('') || "<p>No se encontraron juegos con esos criterios.</p>";
     }
 
     cargarDatos();
