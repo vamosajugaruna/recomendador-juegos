@@ -102,7 +102,7 @@
       const filtrados = juegos.filter(j => {
         const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const matchTipo = !tipo || j.Tipo === tipo;
-        const matchEdad = !edad || parseInt(j["Edad mínima"]) <= edad;
+        const matchEdad = !edad || parseInt(j["Edad mínima"]) >= edad;
         const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
         const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
@@ -135,3 +135,4 @@
   </script>
 </body>
 </html>
+
