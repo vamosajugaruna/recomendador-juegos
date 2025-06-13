@@ -100,6 +100,7 @@
       const clasificacion = document.getElementById("clasificacion").value;
 
       const filtrados = juegos.filter(j => {
+        const precioJuego = parseFloat(j["Precio"].replace(/[^0-9,]/g, '').replace(',', '.'));
         const matchTipo = !tipo || j.Tipo === tipo;
         const matchEdad = !edad || parseInt(j["Edad mínima"]) <= edad;
         const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
@@ -107,7 +108,7 @@
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
         const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
         const matchEditorial = !editorial || j.Editorial === editorial;
-        const matchPrecio = !precio || parseFloat(j["Precio"].replace(/[^\d.,]/g, '').replace(',', '.')) <= precio;
+        const matchPrecio = !precio || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
         return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadoresMin && matchJugadoresMax && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
@@ -119,7 +120,7 @@
     function mostrarJuegos(lista) {
       const div = document.getElementById("resultados");
       div.innerHTML = lista.map(j => {
-        const precio = parseFloat(j["Precio"].replace(/[^\d.,]/g, '').replace(',', '.'));
+        const precio = parseFloat(j["Precio"].replace(/[^0-9,]/g, '').replace(',', '.'));
         return `
         <div class="juego">
           <strong>${j.Nombre}</strong><br>
