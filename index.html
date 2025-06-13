@@ -5,24 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recomendador de Juegos de Mesa</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #fff; }
     h1 { color: #c0392b; }
-    .filtros { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
-    .filtros .fila { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .filtros label { display: flex; flex-direction: column; font-weight: bold; font-size: 0.9rem; }
+    .filtros { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .filtros-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .filtros label { flex: 1; min-width: 150px; display: flex; flex-direction: column; font-weight: bold; font-size: 0.9rem; }
     .juego { border: 1px solid #ccc; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; background: #f9f9f9; }
     .filtros select, .filtros input { padding: 0.3rem; font-size: 1rem; }
+    button { padding: 0.4rem 1rem; font-size: 1rem; cursor: pointer; }
   </style>
 </head>
 <body>
   <h1>🎲 Recomendador de Juegos de Mesa</h1>
   <div class="filtros">
-    <div class="fila">
+    <div class="filtros-row">
       <label>Tipo:
         <select id="tipo"></select>
       </label>
     </div>
-    <div class="fila">
+    <div class="filtros-row">
       <label>Edad mínima:
         <input type="number" id="edad">
       </label>
@@ -33,7 +34,7 @@
         <input type="number" id="edadExacta">
       </label>
     </div>
-    <div class="fila">
+    <div class="filtros-row">
       <label>Duración mínima (min):
         <input type="number" id="duracionMin">
       </label>
@@ -44,7 +45,7 @@
         <input type="number" id="duracionExacta">
       </label>
     </div>
-    <div class="fila">
+    <div class="filtros-row">
       <label>Jugadores mínimos:
         <input type="number" id="jugadoresMin">
       </label>
@@ -55,7 +56,7 @@
         <input type="number" id="jugadoresExactos">
       </label>
     </div>
-    <div class="fila">
+    <div class="filtros-row">
       <label>Editorial:
         <select id="editorial"></select>
       </label>
@@ -69,9 +70,7 @@
         <input type="number" id="precio" step="0.01">
       </label>
     </div>
-    <div class="fila">
-      <button onclick="filtrar()">Filtrar</button>
-    </div>
+    <button onclick="filtrar()">Filtrar</button>
   </div>
   <div id="resultados"></div>
 
@@ -131,6 +130,7 @@
 
       const filtrados = juegos.filter(j => {
         const edadJuego = parseInt(j["Edad mínima"]);
+        const edadMaxJuego = parseInt(j["Edad máxima"]);
         const duracionJuegoMin = parseInt(j["Duración mínima"]);
         const duracionJuegoMax = parseInt(j["Duración máxima"]);
         const jugadoresJuegoMin = parseInt(j["Jugadores mínimos"]);
@@ -138,17 +138,17 @@
         const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
 
         const matchTipo = !tipo || j.Tipo === tipo;
-        const matchEdad = !edad || edadJuego >= edad;
-        const matchEdadMax = !edadMax || edadJuego <= edadMax;
-        const matchEdadExacta = !edadExacta || (edadJuego <= edadExacta && (!isNaN(j["Edad máxima"]) ? parseInt(j["Edad máxima"]) >= edadExacta : true));
-        const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
-        const matchDuracionMax = !duracionMax || (!isNaN(duracionJuegoMax) && duracionJuegoMax <= duracionMax);
-        const matchDuracionExacta = !duracionExacta || (duracionJuegoMin <= duracionExacta && duracionJuegoMax >= duracionExacta);
-        const matchJugadoresMin = isNaN(jugadoresMin) || jugadoresMin === jugadoresJuegoMin;
-        const matchJugadoresMax = isNaN(jugadoresMax) || jugadoresMax === jugadoresJuegoMax;
-        const matchJugadoresExactos = isNaN(jugadoresExactos) || (jugadoresExactos >= jugadoresJuegoMin && jugadoresExactos <= jugadoresJuegoMax);
+        const matchEdad = isNaN(edad) || edadJuego >= edad;
+        const matchEdadMax = isNaN(edadMax) || edadJuego <= edadMax;
+        const matchEdadExacta = isNaN(edadExacta) || (!isNaN(edadJuego) && !isNaN(edadMaxJuego) && edadExacta >= edadJuego && edadExacta <= edadMaxJuego);
+        const matchDuracionMin = isNaN(duracionMin) || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
+        const matchDuracionMax = isNaN(duracionMax) || (!isNaN(duracionJuegoMax) && duracionJuegoMax <= duracionMax);
+        const matchDuracionExacta = isNaN(duracionExacta) || (!isNaN(duracionJuegoMin) && !isNaN(duracionJuegoMax) && duracionExacta >= duracionJuegoMin && duracionExacta <= duracionJuegoMax);
+        const matchJugadoresMin = isNaN(jugadoresMin) || (!isNaN(jugadoresJuegoMin) && jugadoresJuegoMin === jugadoresMin);
+        const matchJugadoresMax = isNaN(jugadoresMax) || (!isNaN(jugadoresJuegoMax) && jugadoresJuegoMax === jugadoresMax);
+        const matchJugadoresExactos = isNaN(jugadoresExactos) || (!isNaN(jugadoresJuegoMin) && !isNaN(jugadoresJuegoMax) && jugadoresExactos >= jugadoresJuegoMin && jugadoresExactos <= jugadoresJuegoMax);
         const matchEditorial = !editorial || j.Editorial === editorial;
-        const matchPrecio = !precio || precioJuego <= precio;
+        const matchPrecio = isNaN(precio) || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
 
