@@ -112,7 +112,7 @@
         const matchTipo = !tipo || j.Tipo === tipo;
         const matchEdad = !edad || edadJuego >= edad;
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
-        const matchDuracionMin = !duracionMin || duracionJuegoMin >= duracionMin;
+        const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
         const matchDuracionMax = !duracionMax || duracionJuegoMax <= duracionMax;
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
         const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
