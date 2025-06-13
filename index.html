@@ -21,6 +21,9 @@
     <label>Edad mínima:
       <input type="number" id="edad">
     </label>
+    <label>Edad máxima:
+      <input type="number" id="edadMax">
+    </label>
     <label>Duración mínima (min):
       <input type="number" id="duracionMin">
     </label>
@@ -90,6 +93,7 @@
     function filtrar() {
       const tipo = document.getElementById("tipo").value;
       const edad = parseInt(document.getElementById("edad").value);
+      const edadMax = parseInt(document.getElementById("edadMax").value);
       const duracionMin = parseInt(document.getElementById("duracionMin").value);
       const duracion = parseInt(document.getElementById("duracion").value);
       const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
@@ -100,9 +104,11 @@
       const clasificacion = document.getElementById("clasificacion").value;
 
       const filtrados = juegos.filter(j => {
+        const edadJuego = parseInt(j["Edad mínima"]);
         const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const matchTipo = !tipo || j.Tipo === tipo;
-        const matchEdad = !edad || parseInt(j["Edad mínima"]) >= edad;
+        const matchEdad = !edad || edadJuego >= edad;
+        const matchEdadMax = !edadMax || edadJuego <= edadMax;
         const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
         const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
@@ -111,7 +117,7 @@
         const matchPrecio = !precio || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
-        return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadoresMin && matchJugadoresMax && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
+        return matchTipo && matchEdad && matchEdadMax && matchDuracionMin && matchDuracion && matchJugadoresMin && matchJugadoresMax && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
       });
 
       mostrarJuegos(filtrados);
@@ -135,4 +141,3 @@
   </script>
 </body>
 </html>
-
