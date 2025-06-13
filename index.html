@@ -116,8 +116,8 @@
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
         const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
         const matchDuracionMax = !duracionMax || (!isNaN(duracionJuegoMax) && duracionJuegoMax <= duracionMax);
-        const matchJugadoresMin = !jugadoresMin || (!isNaN(jugadoresJuegoMin) && jugadoresJuegoMin === jugadoresMin);
-        const matchJugadoresMax = !jugadoresMax || (!isNaN(jugadoresJuegoMax) && jugadoresJuegoMax <= jugadoresMax);
+        const matchJugadoresMin = isNaN(jugadoresMin) || jugadoresJuegoMin === jugadoresMin;
+        const matchJugadoresMax = isNaN(jugadoresMax) || jugadoresJuegoMax === jugadoresMax;
         const matchEditorial = !editorial || j.Editorial === editorial;
         const matchPrecio = !precio || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
