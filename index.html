@@ -7,7 +7,7 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 2rem; }
     h1 { color: #c0392b; }
-    .filtros label { margin-right: 1rem; display: inline-block; min-width: 120px; }
+    .filtros label { margin-right: 1rem; display: inline-block; min-width: 150px; }
     .juego { border: 1px solid #ccc; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; background: #f9f9f9; }
     .filtros select, .filtros input { margin-bottom: 1rem; }
   </style>
@@ -29,6 +29,12 @@
     </label>
     <label>Precio máximo (€):
       <input type="number" id="precio">
+    </label>
+    <label>Modalidad:
+      <select id="modalidad"></select>
+    </label>
+    <label>Clasificación:
+      <select id="clasificacion"></select>
     </label>
     <button onclick="filtrar()">Filtrar</button>
   </div>
@@ -56,9 +62,17 @@
     }
 
     function rellenarFiltros() {
-      const tipos = [...new Set(juegos.map(j => j.Tipo))].sort();
       const tipoSelect = document.getElementById("tipo");
+      const modalidadSelect = document.getElementById("modalidad");
+      const clasificacionSelect = document.getElementById("clasificacion");
+
+      const tipos = [...new Set(juegos.map(j => j.Tipo))].sort();
+      const modalidades = [...new Set(juegos.map(j => j.Modalidad))].sort();
+      const clasificaciones = [...new Set(juegos.map(j => j.Clasificacion))].sort();
+
       tipoSelect.innerHTML = `<option value="">(Cualquiera)</option>` + tipos.map(t => `<option value="${t}">${t}</option>`).join('');
+      modalidadSelect.innerHTML = `<option value="">(Cualquiera)</option>` + modalidades.map(m => `<option value="${m}">${m}</option>`).join('');
+      clasificacionSelect.innerHTML = `<option value="">(Cualquiera)</option>` + clasificaciones.map(c => `<option value="${c}">${c}</option>`).join('');
     }
 
     function filtrar() {
@@ -67,6 +81,8 @@
       const duracion = parseInt(document.getElementById("duracion").value);
       const jugadores = parseInt(document.getElementById("jugadores").value);
       const precio = parseFloat(document.getElementById("precio").value);
+      const modalidad = document.getElementById("modalidad").value;
+      const clasificacion = document.getElementById("clasificacion").value;
 
       const filtrados = juegos.filter(j => {
         const matchTipo = !tipo || j.Tipo === tipo;
@@ -74,7 +90,9 @@
         const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
         const matchJugadores = !jugadores || (parseInt(j["Jugadores mínimos"]) <= jugadores && parseInt(j["Jugadores máximos"]) >= jugadores);
         const matchPrecio = !precio || parseFloat(j["Precio"]) <= precio;
-        return matchTipo && matchEdad && matchDuracion && matchJugadores && matchPrecio;
+        const matchModalidad = !modalidad || j.Modalidad === modalidad;
+        const matchClasificacion = !clasificacion || j.Clasificacion === clasificacion;
+        return matchTipo && matchEdad && matchDuracion && matchJugadores && matchPrecio && matchModalidad && matchClasificacion;
       });
 
       mostrarJuegos(filtrados);
@@ -86,7 +104,8 @@
         <div class="juego">
           <strong>${j.Nombre}</strong><br>
           Tipo: ${j.Tipo} | Edad: ${j["Edad mínima"]}+ | Duración: ${j["Duración mínima"]}-${j["Duración máxima"]} min<br>
-          Jugadores: ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]} | Editorial: ${j.Editorial} | Precio: ${j["Precio"]} €
+          Jugadores: ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]} | Editorial: ${j.Editorial} | Modalidad: ${j.Modalidad}<br>
+          Clasificación: ${j.Clasificacion} | Precio: ${j.Precio} €
         </div>`).join('') || "<p>No se encontraron juegos con esos criterios.</p>";
     }
 
