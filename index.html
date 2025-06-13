@@ -100,7 +100,7 @@
       const clasificacion = document.getElementById("clasificacion").value;
 
       const filtrados = juegos.filter(j => {
-        const precioJuego = parseFloat(j["Precio"].replace(/[^0-9,]/g, '').replace(',', '.'));
+        const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const matchTipo = !tipo || j.Tipo === tipo;
         const matchEdad = !edad || parseInt(j["Edad mínima"]) <= edad;
         const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
@@ -120,7 +120,7 @@
     function mostrarJuegos(lista) {
       const div = document.getElementById("resultados");
       div.innerHTML = lista.map(j => {
-        const precio = parseFloat(j["Precio"].replace(/[^0-9,]/g, '').replace(',', '.'));
+        const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         return `
         <div class="juego">
           <strong>${j.Nombre}</strong><br>
