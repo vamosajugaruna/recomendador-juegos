@@ -62,7 +62,7 @@
           juegos = rows.slice(1).map(row => {
             const values = row.split(',');
             let juego = {};
-            headers.forEach((h, i) => juego[h.trim()] = values[i]?.trim());
+            headers.forEach((h, i) => juego[h.trim()] = values[i]?.trim().replace(/^"|"$/g, ''));
             return juego;
           });
           rellenarFiltros();
@@ -78,7 +78,7 @@
 
       const tipos = [...new Set(juegos.map(j => j.Tipo))].sort();
       const modalidades = [...new Set(juegos.map(j => j.Modalidad))].sort();
-      const clasificaciones = [...new Set(juegos.map(j => j.Clasificacion))].sort();
+      const clasificaciones = [...new Set(juegos.map(j => j["Clasificación"]))].sort();
       const editoriales = [...new Set(juegos.map(j => j.Editorial))].sort();
 
       tipoSelect.innerHTML = `<option value="">(Cualquiera)</option>` + tipos.map(t => `<option value="${t}">${t}</option>`).join('');
@@ -107,9 +107,9 @@
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
         const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
         const matchEditorial = !editorial || j.Editorial === editorial;
-        const matchPrecio = !precio || parseFloat(j["Precio"]) <= precio;
+        const matchPrecio = !precio || parseFloat(j["Precio"].replace(/[^\d.,]/g, '').replace(',', '.')) <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
-        const matchClasificacion = !clasificacion || j.Clasificacion === clasificacion;
+        const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
         return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadoresMin && matchJugadoresMax && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
       });
 
@@ -123,7 +123,7 @@
           <strong>${j.Nombre}</strong><br>
           Tipo: ${j.Tipo} | Edad: ${j["Edad mínima"]}+ | Duración: ${j["Duración mínima"]}-${j["Duración máxima"]} min<br>
           Jugadores: ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]} | Editorial: ${j.Editorial} | Modalidad: ${j.Modalidad}<br>
-          Clasificación: ${j.Clasificacion} | Precio: ${j.Precio} €
+          Clasificación: ${j["Clasificación"]} | Precio: ${j["Precio"]}
         </div>`).join('') || "<p>No se encontraron juegos con esos criterios.</p>";
     }
 
