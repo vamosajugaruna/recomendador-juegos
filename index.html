@@ -27,8 +27,11 @@
     <label>Duración máxima (min):
       <input type="number" id="duracion">
     </label>
-    <label>Número de jugadores:
-      <input type="number" id="jugadores">
+    <label>Jugadores mínimos:
+      <input type="number" id="jugadoresMin">
+    </label>
+    <label>Jugadores máximos:
+      <input type="number" id="jugadoresMax">
     </label>
     <label>Editorial:
       <select id="editorial"></select>
@@ -89,7 +92,8 @@
       const edad = parseInt(document.getElementById("edad").value);
       const duracionMin = parseInt(document.getElementById("duracionMin").value);
       const duracion = parseInt(document.getElementById("duracion").value);
-      const jugadores = parseInt(document.getElementById("jugadores").value);
+      const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
+      const jugadoresMax = parseInt(document.getElementById("jugadoresMax").value);
       const editorial = document.getElementById("editorial").value;
       const precio = parseFloat(document.getElementById("precio").value);
       const modalidad = document.getElementById("modalidad").value;
@@ -100,12 +104,13 @@
         const matchEdad = !edad || parseInt(j["Edad mínima"]) <= edad;
         const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
         const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
-        const matchJugadores = !jugadores || (parseInt(j["Jugadores mínimos"]) <= jugadores && parseInt(j["Jugadores máximos"]) >= jugadores);
+        const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
+        const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
         const matchEditorial = !editorial || j.Editorial === editorial;
         const matchPrecio = !precio || parseFloat(j["Precio"]) <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j.Clasificacion === clasificacion;
-        return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadores && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
+        return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadoresMin && matchJugadoresMax && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
       });
 
       mostrarJuegos(filtrados);
