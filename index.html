@@ -107,6 +107,8 @@
         const edadJuego = parseInt(j["Edad mínima"]);
         const duracionJuegoMin = parseInt(j["Duración mínima"]);
         const duracionJuegoMax = parseInt(j["Duración máxima"]);
+        const jugadoresJuegoMin = parseInt(j["Jugadores mínimos"]);
+        const jugadoresJuegoMax = parseInt(j["Jugadores máximos"]);
         const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
 
         const matchTipo = !tipo || j.Tipo === tipo;
@@ -114,8 +116,8 @@
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
         const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
         const matchDuracionMax = !duracionMax || (!isNaN(duracionJuegoMax) && duracionJuegoMax <= duracionMax);
-        const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
-        const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
+        const matchJugadoresMin = !jugadoresMin || (!isNaN(jugadoresJuegoMin) && jugadoresJuegoMin <= jugadoresMin);
+        const matchJugadoresMax = !jugadoresMax || (!isNaN(jugadoresJuegoMax) && jugadoresJuegoMax >= jugadoresMax);
         const matchEditorial = !editorial || j.Editorial === editorial;
         const matchPrecio = !precio || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
