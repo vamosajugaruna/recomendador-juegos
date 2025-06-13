@@ -30,6 +30,9 @@
     <label>Número de jugadores:
       <input type="number" id="jugadores">
     </label>
+    <label>Editorial:
+      <select id="editorial"></select>
+    </label>
     <label>Precio máximo (€):
       <input type="number" id="precio">
     </label>
@@ -68,14 +71,17 @@
       const tipoSelect = document.getElementById("tipo");
       const modalidadSelect = document.getElementById("modalidad");
       const clasificacionSelect = document.getElementById("clasificacion");
+      const editorialSelect = document.getElementById("editorial");
 
       const tipos = [...new Set(juegos.map(j => j.Tipo))].sort();
       const modalidades = [...new Set(juegos.map(j => j.Modalidad))].sort();
       const clasificaciones = [...new Set(juegos.map(j => j.Clasificacion))].sort();
+      const editoriales = [...new Set(juegos.map(j => j.Editorial))].sort();
 
       tipoSelect.innerHTML = `<option value="">(Cualquiera)</option>` + tipos.map(t => `<option value="${t}">${t}</option>`).join('');
       modalidadSelect.innerHTML = `<option value="">(Cualquiera)</option>` + modalidades.map(m => `<option value="${m}">${m}</option>`).join('');
       clasificacionSelect.innerHTML = `<option value="">(Cualquiera)</option>` + clasificaciones.map(c => `<option value="${c}">${c}</option>`).join('');
+      editorialSelect.innerHTML = `<option value="">(Cualquiera)</option>` + editoriales.map(e => `<option value="${e}">${e}</option>`).join('');
     }
 
     function filtrar() {
@@ -84,6 +90,7 @@
       const duracionMin = parseInt(document.getElementById("duracionMin").value);
       const duracion = parseInt(document.getElementById("duracion").value);
       const jugadores = parseInt(document.getElementById("jugadores").value);
+      const editorial = document.getElementById("editorial").value;
       const precio = parseFloat(document.getElementById("precio").value);
       const modalidad = document.getElementById("modalidad").value;
       const clasificacion = document.getElementById("clasificacion").value;
@@ -94,10 +101,11 @@
         const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
         const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
         const matchJugadores = !jugadores || (parseInt(j["Jugadores mínimos"]) <= jugadores && parseInt(j["Jugadores máximos"]) >= jugadores);
+        const matchEditorial = !editorial || j.Editorial === editorial;
         const matchPrecio = !precio || parseFloat(j["Precio"]) <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j.Clasificacion === clasificacion;
-        return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadores && matchPrecio && matchModalidad && matchClasificacion;
+        return matchTipo && matchEdad && matchDuracionMin && matchDuracion && matchJugadores && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
       });
 
       mostrarJuegos(filtrados);
