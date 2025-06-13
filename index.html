@@ -113,7 +113,7 @@
         const matchEdad = !edad || edadJuego >= edad;
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
         const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
-        const matchDuracionMax = !duracionMax || duracionJuegoMax <= duracionMax;
+        const matchDuracionMax = !duracionMax || (!isNaN(duracionJuegoMax) && duracionJuegoMax <= duracionMax);
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
         const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
         const matchEditorial = !editorial || j.Editorial === editorial;
