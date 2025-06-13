@@ -112,7 +112,7 @@
         const matchTipo = !tipo || j.Tipo === tipo;
         const matchEdad = !edad || edadJuego >= edad;
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
-        const matchDuracionMin = !duracionMin || duracionJuegoMax >= duracionMin;
+        const matchDuracionMin = !duracionMin || duracionJuegoMin >= duracionMin;
         const matchDuracionMax = !duracionMax || duracionJuegoMax <= duracionMax;
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
         const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
@@ -136,7 +136,7 @@
           <strong>${j.Nombre}</strong><br>
           Tipo: ${j.Tipo} | Edad: ${j["Edad mínima"]}+ | Duración: ${j["Duración mínima"]}-${j["Duración máxima"]} min<br>
           Jugadores: ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]} | Editorial: ${j.Editorial} | Modalidad: ${j.Modalidad}<br>
-          Clasificación: ${j["Clasificación"]} | Precio: ${precio.toFixed(2)} €
+          Clasificación: ${j["Clasificación"]} | Precio: ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}
         </div>`;
       }).join('') || "<p>No se encontraron juegos con esos criterios.</p>";
     }
