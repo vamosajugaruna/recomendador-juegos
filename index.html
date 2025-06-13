@@ -28,7 +28,7 @@
       <input type="number" id="duracionMin">
     </label>
     <label>Duración máxima (min):
-      <input type="number" id="duracion">
+      <input type="number" id="duracionMax">
     </label>
     <label>Jugadores mínimos:
       <input type="number" id="jugadoresMin">
@@ -95,7 +95,7 @@
       const edad = parseInt(document.getElementById("edad").value);
       const edadMax = parseInt(document.getElementById("edadMax").value);
       const duracionMin = parseInt(document.getElementById("duracionMin").value);
-      const duracion = parseInt(document.getElementById("duracion").value);
+      const duracionMax = parseInt(document.getElementById("duracionMax").value);
       const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
       const jugadoresMax = parseInt(document.getElementById("jugadoresMax").value);
       const editorial = document.getElementById("editorial").value;
@@ -105,19 +105,23 @@
 
       const filtrados = juegos.filter(j => {
         const edadJuego = parseInt(j["Edad mínima"]);
+        const duracionJuegoMin = parseInt(j["Duración mínima"]);
+        const duracionJuegoMax = parseInt(j["Duración máxima"]);
         const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+
         const matchTipo = !tipo || j.Tipo === tipo;
         const matchEdad = !edad || edadJuego >= edad;
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
-        const matchDuracionMin = !duracionMin || parseInt(j["Duración mínima"]) >= duracionMin;
-        const matchDuracion = !duracion || parseInt(j["Duración máxima"]) <= duracion;
+        const matchDuracionMin = !duracionMin || duracionJuegoMin >= duracionMin;
+        const matchDuracionMax = !duracionMax || duracionJuegoMax <= duracionMax;
         const matchJugadoresMin = !jugadoresMin || parseInt(j["Jugadores máximos"]) >= jugadoresMin;
         const matchJugadoresMax = !jugadoresMax || parseInt(j["Jugadores mínimos"]) <= jugadoresMax;
         const matchEditorial = !editorial || j.Editorial === editorial;
         const matchPrecio = !precio || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
-        return matchTipo && matchEdad && matchEdadMax && matchDuracionMin && matchDuracion && matchJugadoresMin && matchJugadoresMax && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
+
+        return matchTipo && matchEdad && matchEdadMax && matchDuracionMin && matchDuracionMax && matchJugadoresMin && matchJugadoresMax && matchEditorial && matchPrecio && matchModalidad && matchClasificacion;
       });
 
       mostrarJuegos(filtrados);
