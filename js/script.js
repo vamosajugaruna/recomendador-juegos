@@ -112,55 +112,28 @@ function filtrar() {
       mostrarJuegos(filtrados);
     }
 
-    
-function mostrarJuegos(lista) {
+    function mostrarJuegos(lista) {
   const contador = document.getElementById("contador");
   contador.textContent = lista.length > 0 ? `🎯 Juegos encontrados: ${lista.length}` : "⚠️ No se encontraron juegos con esos criterios.";
 
-  const div = document.getElementById("resultados");
-  div.innerHTML = "";
-
-  lista.forEach((j, i) => {
-    const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
-    const tarjeta = document.createElement("div");
-    tarjeta.className = "juego animado";
-    tarjeta.style.animationDelay = `${i * 60}ms`;
-    tarjeta.innerHTML = `
-      <strong>${j.Nombre}</strong>
-      <p><strong>Tipo:</strong> ${j.Tipo}</p>
-      <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
-      <p><strong>Duración:</strong> ${j["Duración mínima"]}-${j["Duración máxima"]} min</p>
-      <p><strong>Jugadores:</strong> ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]}</p>
-      <p><strong>Editorial:</strong> ${j.Editorial}</p>
-      <p><strong>Modalidad:</strong> ${j.Modalidad}</p>
-      <p><strong>Clasificación:</strong> ${j["Clasificación"]}</p>
-      <p><strong>Precio:</strong> ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}</p>
-    `;
-    div.appendChild(tarjeta);
-  });
-}
-` : "⚠️ No se encontraron juegos con esos criterios.";
-
       const div = document.getElementById("resultados");
-      div.innerHTML = "";
-  lista.forEach((j, i) => {
-    const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
-    const tarjeta = document.createElement("div");
-    tarjeta.className = "juego animado";
-    tarjeta.style.animationDelay = `${i * 60}ms`;
-    tarjeta.innerHTML = `
-      <strong>${j.Nombre}</strong>
-      <p><strong>Tipo:</strong> ${j.Tipo}</p>
-      <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
-      <p><strong>Duración:</strong> ${j["Duración mínima"]}-${j["Duración máxima"]} min</p>
-      <p><strong>Jugadores:</strong> ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]}</p>
-      <p><strong>Editorial:</strong> ${j.Editorial}</p>
-      <p><strong>Modalidad:</strong> ${j.Modalidad}</p>
-      <p><strong>Clasificación:</strong> ${j["Clasificación"]}</p>
-      <p><strong>Precio:</strong> ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}</p>
-    `;
-    div.appendChild(tarjeta);
-  });
+      div.innerHTML = lista.map(j => {
+        const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+        return `
+        
+<div class="juego">
+  <strong>${j.Nombre}</strong>
+  <p><strong>Tipo:</strong> ${j.Tipo}</p>
+  <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
+  <p><strong>Duración:</strong> ${j["Duración mínima"]}-${j["Duración máxima"]} min</p>
+  <p><strong>Jugadores:</strong> ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]}</p>
+  <p><strong>Editorial:</strong> ${j.Editorial}</p>
+  <p><strong>Modalidad:</strong> ${j.Modalidad}</p>
+  <p><strong>Clasificación:</strong> ${j["Clasificación"]}</p>
+  <p><strong>Precio:</strong> ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}</p>
+</div>
+`;
+      }).join('');
     }
 
     cargarDatos();
