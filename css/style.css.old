@@ -141,17 +141,3 @@ body.dark-mode .juego strong {
   margin: 0.8rem 0;
   display: block;
 }
-
-.cabecera-juego {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.cabecera-juego .miniatura {
-  width: auto;
-  height: 100px;
-  object-fit: contain;
-  border-radius: 8px;
-}
