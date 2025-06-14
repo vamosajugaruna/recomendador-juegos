@@ -39,7 +39,17 @@
 <div class="fila">
 <label>Tipo:<select id="tipo"></select></label>
 <label>Mecánica principal:<select id="mecanica"></select></label>
-</div>
+
+  <div class="fila">
+    <label>Ordenar por:
+      <select id="orden">
+        <option value="">(Sin orden)</option>
+        <option value="nombre">Nombre (A–Z)</option>
+        <option value="duracion">Duración</option>
+        <option value="precio">Precio</option>
+      </select>
+    </label>
+  </div></div>
 <div class="fila">
 <label>Edad mínima:<input id="edad" type="number"/></label>
 <label>Edad máxima:<input id="edadMax" type="number"/></label>
@@ -61,20 +71,14 @@
 <label>Clasificación:<select id="clasificacion"></select></label>
 <label>Precio máximo (€):<input id="precio" step="0.01" type="number"/></label>
 </div>
-</div>
 <div class="fila">
-<label>Ordenar por:
-  <select id="orden">
-    <option value="">(Sin orden)</option>
-    <option value="nombre">Nombre (A–Z)</option>
-    <option value="duracion">Duración</option>
-    <option value="precio">Precio</option>
-  </select>
-</label></div>
 <div style="text-align: center;">
 <button onclick="filtrar()">Filtrar</button>
 <button onclick="resetearFiltros()" style="margin-left: 10px; background-color: #bbb;">Resetear</button>
 </div>
+</div>
+</div>
+
 <div id="contador" style="margin-top: 2rem; font-weight: bold; font-size: 1rem;"></div>
 <div id="resultados"></div>
 <script src="js/script.js"></script>

@@ -135,16 +135,18 @@ body.dark-mode .juego strong {
 
 
 
+
 .miniatura {
-  width: 220px;
+  width: 260px;
   height: auto;
-  max-height: 300px;
+  max-height: 340px;
   object-fit: contain;
   border-radius: 8px;
   margin: 1rem 0;
   display: block;
   text-align: left;
 }
+
 
 
 
