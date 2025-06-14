@@ -62,6 +62,15 @@
 <label>Precio máximo (€):<input id="precio" step="0.01" type="number"/></label>
 </div>
 </div>
+<div class="fila">
+<label>Ordenar por:
+  <select id="orden">
+    <option value="">(Sin orden)</option>
+    <option value="nombre">Nombre (A–Z)</option>
+    <option value="duracion">Duración</option>
+    <option value="precio">Precio</option>
+  </select>
+</label></div>
 <div style="text-align: center;">
 <button onclick="filtrar()">Filtrar</button>
 <button onclick="resetearFiltros()" style="margin-left: 10px; background-color: #bbb;">Resetear</button>
