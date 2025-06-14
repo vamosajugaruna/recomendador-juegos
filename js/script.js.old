@@ -109,6 +109,7 @@ function filtrar() {
         matchPrecio &&
         matchModalidad &&
         matchClasificacion &&
+        matchMecanica &&
         (isNaN(edadExacta) || edadJuego === edadExacta) &&
         (isNaN(duracionExacta) || duracionJuegoMin <= duracionExacta && duracionJuegoMax >= duracionExacta) &&
         (isNaN(jugadoresExactos) || (jugadoresJuegoMin <= jugadoresExactos && jugadoresJuegoMax >= jugadoresExactos));
@@ -129,13 +130,13 @@ function filtrar() {
 <div class="juego">
   <strong>${j.Nombre}</strong>
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
+  <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
   <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
   <p><strong>Duración:</strong> ${j["Duración mínima"]}-${j["Duración máxima"]} min</p>
   <p><strong>Jugadores:</strong> ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]}</p>
   <p><strong>Editorial:</strong> ${j.Editorial}</p>
   <p><strong>Modalidad:</strong> ${j.Modalidad}</p>
   <p><strong>Clasificación:</strong> ${j["Clasificación"]}</p>
-  <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
   <p><strong>Precio:</strong> ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}</p>
 </div>
 `;

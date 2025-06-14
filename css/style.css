@@ -131,3 +131,11 @@ body.dark-mode .juego strong {
   animation: fadeInUp 0.4s ease forwards;
   opacity: 0;
 }
+
+.miniatura {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0.8rem 0;
+}

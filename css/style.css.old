@@ -115,3 +115,19 @@ body.dark-mode a {
 body.dark-mode .juego strong {
   color: #e74c3c;
 }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.juego.animado {
+  animation: fadeInUp 0.4s ease forwards;
+  opacity: 0;
+}
