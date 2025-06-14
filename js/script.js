@@ -60,7 +60,6 @@ const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaD
   mostrarJuegos(juegos);
 }
 
-
 function filtrar() {
   const nombre = document.getElementById("nombre").value.toLowerCase();
   const tipo = document.getElementById("tipo").value;
@@ -69,19 +68,19 @@ function filtrar() {
   const mecanica = document.getElementById("mecanica").value;
   const orden = document.getElementById("orden").value;
 
-  let juegosFiltrados = juegos.filter(j => {
-    const matchNombre = j.Nombre.toLowerCase().includes(nombre);
-    const matchTipo = tipo === "" || j.Tipo === tipo;
-    const matchJugadores = jugadores === "" || j.Jugadores.includes(jugadores);
-    const matchTiempo = tiempo === "" || j.Tiempo === tiempo;
-    const matchMecanica = mecanica === "" || j.Mecanica === mecanica;
-    return matchNombre && matchTipo && matchJugadores && matchTiempo && matchMecanica;
-  });
+  const sinFiltros = 
+    nombre === "" && tipo === "" && jugadores === "" && tiempo === "" && mecanica === "";
 
-  if (juegosFiltrados.length === 0 && orden !== "") {
-    // Si no hay filtros aplicados, usar todos los juegos para ordenar
-    juegosFiltrados = [...juegos];
-  }
+  let juegosFiltrados = sinFiltros
+    ? [...juegos]
+    : juegos.filter(j => {
+        const matchNombre = j.Nombre.toLowerCase().includes(nombre);
+        const matchTipo = tipo === "" || j.Tipo === tipo;
+        const matchJugadores = jugadores === "" || j.Jugadores.includes(jugadores);
+        const matchTiempo = tiempo === "" || j.Tiempo === tiempo;
+        const matchMecanica = mecanica === "" || j.Mecanica === mecanica;
+        return matchNombre && matchTipo && matchJugadores && matchTiempo && matchMecanica;
+      });
 
   if (orden === "nombre") {
     juegosFiltrados.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
@@ -93,7 +92,6 @@ function filtrar() {
 
   mostrarJuegos(juegosFiltrados);
 }
-
 
   mostrarJuegos(filtrados);
     }
