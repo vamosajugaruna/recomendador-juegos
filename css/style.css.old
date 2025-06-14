@@ -133,15 +133,15 @@ body.dark-mode .juego strong {
 }
 
 .miniatura {
+  width: 100%;
   height: auto;
   max-height: 220px;
   object-fit: contain;
   border-radius: 8px;
   margin: 0.8rem 0;
   display: block;
-  margin-left: 0;
 }
-.descripcion {
-  color: #555;
-  margin: 0.5rem 0 1rem;
+
+body.dark-mode .descripcion {
+  color: #f8f8f8;
 }
