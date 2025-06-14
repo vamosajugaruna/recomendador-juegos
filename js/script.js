@@ -61,59 +61,62 @@ const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaD
 }
 
 function filtrar() {
-  const tipo = document.getElementById("tipo").value;
-  const edad = parseInt(document.getElementById("edad").value);
-  const edadMax = parseInt(document.getElementById("edadMax").value);
-  const duracionMin = parseInt(document.getElementById("duracionMin").value);
-  const duracionMax = parseInt(document.getElementById("duracionMax").value);
-  const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
-  const jugadoresMax = parseInt(document.getElementById("jugadoresMax").value);
-  const editorial = document.getElementById("editorial").value;
-  const precio = parseFloat(document.getElementById("precio").value);
-  const modalidad = document.getElementById("modalidad").value;
-  const clasificacion = document.getElementById("clasificacion").value;
-  const mecanica = document.getElementById("mecanica").value;
+      const tipo = document.getElementById("tipo").value;
+      const edad = parseInt(document.getElementById("edad").value);
+      const edadMax = parseInt(document.getElementById("edadMax").value);
+      const duracionMin = parseInt(document.getElementById("duracionMin").value);
+      const duracionMax = parseInt(document.getElementById("duracionMax").value);
+      const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
+      const jugadoresMax = parseInt(document.getElementById("jugadoresMax").value);
+      const editorial = document.getElementById("editorial").value;
+      const precio = parseFloat(document.getElementById("precio").value);
+      const modalidad = document.getElementById("modalidad").value;
+      const clasificacion = document.getElementById("clasificacion").value;
+      const mecanica = document.getElementById("mecanica").value;
   const edadExacta = parseInt(document.getElementById("edadExacta").value);
   const duracionExacta = parseInt(document.getElementById("duracionExacta").value);
   const jugadoresExactos = parseInt(document.getElementById("jugadoresExactos").value);
+
+      const filtrados = juegos.filter(j => {
+        const edadJuego = parseInt(j["Edad mínima"]);
+        const duracionJuegoMin = parseInt(j["Duración mínima"]);
+        const duracionJuegoMax = parseInt(j["Duración máxima"]);
+        const jugadoresJuegoMin = parseInt(j["Jugadores mínimos"]);
+        const jugadoresJuegoMax = parseInt(j["Jugadores máximos"]);
+        const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+
+        const matchTipo = !tipo || j.Tipo === tipo;
+        const matchEdad = !edad || edadJuego >= edad;
+        const matchEdadMax = !edadMax || edadJuego <= edadMax;
+        const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
+        const matchDuracionMax = !duracionMax || (!isNaN(duracionJuegoMax) && duracionJuegoMax === duracionMax);
+        const matchJugadoresMin = isNaN(jugadoresMin) || (!isNaN(jugadoresJuegoMin) && jugadoresJuegoMin === jugadoresMin);
+        const matchJugadoresMax = isNaN(jugadoresMax) || (!isNaN(jugadoresJuegoMax) && jugadoresJuegoMax === jugadoresMax);
+        const matchEditorial = !editorial || j.Editorial === editorial;
+        const matchPrecio = isNaN(precio) || precioJuego <= precio;
+        const matchModalidad = !modalidad || j.Modalidad === modalidad;
+        const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
+        const matchMecanica = !mecanica || (j["Mecánica principal"]?.trim() === mecanica.trim());
+
+        return matchTipo &&
+        matchEdad &&
+        matchEdadMax &&
+        matchDuracionMin &&
+        matchDuracionMax &&
+        matchJugadoresMin &&
+        matchJugadoresMax &&
+        matchEditorial &&
+        matchPrecio &&
+        matchModalidad &&
+        matchClasificacion &&
+        matchMecanica &&
+        (isNaN(edadExacta) || edadJuego === edadExacta) &&
+        (isNaN(duracionExacta) || duracionJuegoMin <= duracionExacta && duracionJuegoMax >= duracionExacta) &&
+        (isNaN(jugadoresExactos) || (jugadoresJuegoMin <= jugadoresExactos && jugadoresJuegoMax >= jugadoresExactos));
+      });
+
+      
   const orden = document.getElementById("orden").value;
-
-  const sinFiltros = !tipo && isNaN(edad) && isNaN(edadMax) && isNaN(duracionMin) && isNaN(duracionMax) &&
-    isNaN(jugadoresMin) && isNaN(jugadoresMax) && !editorial && isNaN(precio) &&
-    !modalidad && !clasificacion && !mecanica && isNaN(edadExacta) &&
-    isNaN(duracionExacta) && isNaN(jugadoresExactos);
-
-  const filtrados = (sinFiltros ? juegos : juegos.filter(j => {
-    const edadJuego = parseInt(j["Edad mínima"]);
-    const duracionJuegoMin = parseInt(j["Duración mínima"]);
-    const duracionJuegoMax = parseInt(j["Duración máxima"]);
-    const jugadoresJuegoMin = parseInt(j["Jugadores mínimos"]);
-    const jugadoresJuegoMax = parseInt(j["Jugadores máximos"]);
-    const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
-
-    const matchTipo = !tipo || j.Tipo === tipo;
-    const matchEdad = isNaN(edad) || edadJuego >= edad;
-    const matchEdadMax = isNaN(edadMax) || edadJuego <= edadMax;
-    const matchDuracionMin = isNaN(duracionMin) || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
-    const matchDuracionMax = isNaN(duracionMax) || (!isNaN(duracionJuegoMax) && duracionJuegoMax === duracionMax);
-    const matchJugadoresMin = isNaN(jugadoresMin) || (!isNaN(jugadoresJuegoMin) && jugadoresJuegoMin === jugadoresMin);
-    const matchJugadoresMax = isNaN(jugadoresMax) || (!isNaN(jugadoresJuegoMax) && jugadoresJuegoMax === jugadoresMax);
-    const matchEditorial = !editorial || j.Editorial === editorial;
-    const matchPrecio = isNaN(precio) || precioJuego <= precio;
-    const matchModalidad = !modalidad || j.Modalidad === modalidad;
-    const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
-    const matchMecanica = !mecanica || (j["Mecánica principal"]?.trim() === mecanica.trim());
-    const matchEdadExacta = isNaN(edadExacta) || edadJuego === edadExacta;
-    const matchDuracionExacta = isNaN(duracionExacta) || (duracionJuegoMin <= duracionExacta && duracionJuegoMax >= duracionExacta);
-    const matchJugadoresExactos = isNaN(jugadoresExactos) || (jugadoresJuegoMin <= jugadoresExactos && jugadoresJuegoMax >= jugadoresExactos);
-
-    return matchTipo && matchEdad && matchEdadMax && matchDuracionMin &&
-           matchDuracionMax && matchJugadoresMin && matchJugadoresMax &&
-           matchEditorial && matchPrecio && matchModalidad &&
-           matchClasificacion && matchMecanica && matchEdadExacta &&
-           matchDuracionExacta && matchJugadoresExactos;
-  }));
-
   if (orden === "nombre") {
     filtrados.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
   } else if (orden === "duracion") {
@@ -125,9 +128,6 @@ function filtrar() {
       return pa - pb;
     });
   }
-
-  mostrarJuegos(filtrados);
-}
 
   mostrarJuegos(filtrados);
     }
