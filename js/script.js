@@ -144,6 +144,7 @@ function filtrar() {
 <div class="juego">
   <strong>${j.Nombre}</strong>
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
+  <p class="descripcion">${j["Descripción"]}</p>
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
   <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
   <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
