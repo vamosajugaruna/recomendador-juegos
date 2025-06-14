@@ -115,7 +115,21 @@ function filtrar() {
         (isNaN(jugadoresExactos) || (jugadoresJuegoMin <= jugadoresExactos && jugadoresJuegoMax >= jugadoresExactos));
       });
 
-      mostrarJuegos(filtrados);
+      
+  const orden = document.getElementById("orden").value;
+  if (orden === "nombre") {
+    filtrados.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+  } else if (orden === "duracion") {
+    filtrados.sort((a, b) => parseInt(a["Duración mínima"]) - parseInt(b["Duración mínima"]));
+  } else if (orden === "precio") {
+    filtrados.sort((a, b) => {
+      const pa = parseFloat(a["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+      const pb = parseFloat(b["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+      return pa - pb;
+    });
+  }
+
+  mostrarJuegos(filtrados);
     }
 
     function mostrarJuegos(lista) {
