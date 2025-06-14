@@ -126,10 +126,13 @@ function filtrar() {
       div.innerHTML = lista.map(j => {
         const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
+        const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
         return `
 <div class="juego">
-  <strong>${j.Nombre}</strong>
-  ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
+  <div class="cabecera-juego">
+    ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
+    <strong>${j.Nombre}</strong>
+  </div>
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
   <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
   <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>

@@ -134,8 +134,10 @@ body.dark-mode .juego strong {
 
 .miniatura {
   width: 100%;
-  max-height: 180px;
-  object-fit: cover;
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
   border-radius: 8px;
   margin: 0.8rem 0;
+  display: block;
 }
