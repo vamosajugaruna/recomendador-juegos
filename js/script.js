@@ -96,7 +96,7 @@ function filtrar() {
         const matchPrecio = isNaN(precio) || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
-        const matchMecanica = !mecanica || j["Mecánica principal"] === mecanica;
+        const matchMecanica = !mecanica || (j["Mecánica principal"]?.trim() === mecanica.trim());
 
         return matchTipo &&
         matchEdad &&
