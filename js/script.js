@@ -115,7 +115,21 @@ function filtrar() {
         (isNaN(jugadoresExactos) || (jugadoresJuegoMin <= jugadoresExactos && jugadoresJuegoMax >= jugadoresExactos));
       });
 
-      mostrarJuegos(filtrados);
+      
+  const orden = document.getElementById("orden").value;
+  if (orden === "nombre") {
+    filtrados.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+  } else if (orden === "duracion") {
+    filtrados.sort((a, b) => parseInt(a["Duración mínima"]) - parseInt(b["Duración mínima"]));
+  } else if (orden === "precio") {
+    filtrados.sort((a, b) => {
+      const pa = parseFloat(a["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+      const pb = parseFloat(b["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+      return pa - pb;
+    });
+  }
+
+  mostrarJuegos(filtrados);
     }
 
     function mostrarJuegos(lista) {
@@ -130,7 +144,6 @@ function filtrar() {
 <div class="juego">
   <strong>${j.Nombre}</strong>
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
-  <p class="descripcion">${j["Descripción"]}</p>
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
   <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
   <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
