@@ -127,6 +127,7 @@ function filtrar() {
         const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
+        const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
         return `
 <div class="juego">
   <div class="cabecera-juego">
