@@ -132,15 +132,18 @@ body.dark-mode .juego strong {
   opacity: 0;
 }
 
+
 .miniatura {
-  width: 100%;
+  width: 130px;
   height: auto;
-  max-height: 220px;
+  max-height: 200px;
   object-fit: contain;
   border-radius: 8px;
-  margin: 0.8rem 0;
+  margin: 0.5rem 0;
   display: block;
+  text-align: left;
 }
+
 
 body.dark-mode .descripcion {
   color: #f8f8f8;
