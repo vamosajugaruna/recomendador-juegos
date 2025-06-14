@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<nav style="background-color: white; border-bottom: 1px solid #ddd; padding: 1rem 2rem; font-family: 'Poppins', sans-serif; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; font-weight: 500; font-size: 0.95rem;">
+  <a href="#top" style="text-decoration: none; color: #c0392b;">Inicio</a>
+  <a href="#filtros" style="text-decoration: none; color: #c0392b;">Filtrar</a>
+  <a href="https://www.instagram.com/vamosajugaruna/" target="_blank" style="text-decoration: none; color: #c0392b;">Contacto</a>
+  <a href="https://www.youtube.com/@vamosajugaruna" target="_blank" style="text-decoration: none; color: #c0392b;">YouTube</a>
+  <button id="modoBtn" onclick="toggleDarkMode()" style="margin-left: auto; padding: 0.3rem 0.8rem; font-size: 0.85rem; cursor: pointer; border: 1px solid #c0392b; background: white; color: #c0392b; border-radius: 5px;">🌓 Modo oscuro</button>
+</nav>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recomendador de Juegos de Mesa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top" id="top" class="">
+
+
+
+
+
+
+
+
+
+  <div style="text-align:center;"><img src="images/logo_vamosajugaruna.png" alt="Logo Vamos a Jugar Una" style="max-width: 160px; margin-bottom: 1rem;"></div>
+
+<div style="text-align:center; margin-top: 0.5rem; font-size: 0.95rem;">
+  <a href="https://www.youtube.com/@vamosajugaruna" target="_blank" style="margin: 0 15px; color: #c0392b; font-weight: bold;">
+    <img src="images/icono_youtube.png" alt="YouTube" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+    YouTube
+  </a>
+  <a href="https://www.instagram.com/vamosajugaruna/" target="_blank" style="margin: 0 15px; color: #c0392b; font-weight: bold;">
+    <img src="images/icono_instagram.png" alt="Instagram" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+    Instagram
+  </a>
+</div>
+<h1>🎲 Recomendador de Juegos de Mesa</h1>
+  <div class="filtros" id="filtros">
+    <div class="fila">
+      <label>Tipo:<select id="tipo"></select></label>
+    </div>
+    <div class="fila">
+      <label>Edad mínima:<input type="number" id="edad"></label>
+      <label>Edad máxima:<input type="number" id="edadMax"></label>
+<label>Edad exacta:<input type="number" id="edadExacta"></label>
+    </div>
+    <div class="fila">
+      <label>Duración mínima (min):<input type="number" id="duracionMin"></label>
+      <label>Duración máxima (min):<input type="number" id="duracionMax"></label>
+<label>Duración exacta:<input type="number" id="duracionExacta"></label>
+    </div>
+    <div class="fila">
+      <label>Jugadores mínimos:<input type="number" id="jugadoresMin"></label>
+      <label>Jugadores máximos:<input type="number" id="jugadoresMax"></label>
+<label>Jugadores exactos:<input type="number" id="jugadoresExactos"></label>
+    </div>
+    <div class="fila">
+      <label>Editorial:<select id="editorial"></select></label>
+      <label>Modalidad:<select id="modalidad"></select></label>
+      <label>Clasificación:<select id="clasificacion"></select></label>
+      <label>Precio máximo (€):<input type="number" id="precio" step="0.01"></label>
+    </div>
+  </div>
+  <div style="text-align: center;">
+  <button onclick="filtrar()">Filtrar</button>
+  <button onclick="resetearFiltros()" style="margin-left: 10px; background-color: #bbb;">Resetear</button>
+</div>
+  <div id="contador" style="margin-top: 2rem; font-weight: bold; font-size: 1rem;"></div>
+  <div id="resultados"></div>
+
+  
+
+
+
+
+
+
+  <script src="js/script.js"></script>
+</body>
+</html>
