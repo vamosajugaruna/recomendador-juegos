@@ -126,13 +126,10 @@ function filtrar() {
       div.innerHTML = lista.map(j => {
         const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
-        const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
         return `
 <div class="juego">
-  <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-    ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" style="height: 100px; width: auto; border-radius: 8px;">` : ''}
-    <strong>${j.Nombre}</strong>
-  </div>
+  <strong>${j.Nombre}</strong>
+  ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
   <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
   <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
@@ -141,7 +138,6 @@ function filtrar() {
   <p><strong>Editorial:</strong> ${j.Editorial}</p>
   <p><strong>Modalidad:</strong> ${j.Modalidad}</p>
   <p><strong>Clasificación:</strong> ${j["Clasificación"]}</p>
-  <p class="descripcion">${j["Descripción"]}</p>
   <p><strong>Precio:</strong> ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}</p>
 </div>
 `;

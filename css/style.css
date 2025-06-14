@@ -141,8 +141,3 @@ body.dark-mode .juego strong {
   display: block;
   margin-left: 0;
 }
-.descripcion {
-  font-style: italic;
-  color: #555;
-  margin: 1rem 0 0.5rem;
-}
