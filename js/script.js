@@ -135,6 +135,7 @@ function filtrar() {
   <p><strong>Editorial:</strong> ${j.Editorial}</p>
   <p><strong>Modalidad:</strong> ${j.Modalidad}</p>
   <p><strong>Clasificación:</strong> ${j["Clasificación"]}</p>
+  <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
   <p><strong>Precio:</strong> ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}</p>
 </div>
 `;
