@@ -149,7 +149,7 @@ function filtrar() {
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
         return `
 <div class="juego">
-  <strong>${j.Nombre}</strong>
+  <p><strong>${j.Nombre}</strong></p>
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <p class="descripcion">${j["Descripción"]}</p>
   ${j.BGG ? `<p><a href="https://boardgamegeek.com/boardgame/${j.BGG}" target="_blank" class="bgg-link">🔗 Ver en BGG</a></p>` : ''}
