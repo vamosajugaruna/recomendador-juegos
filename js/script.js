@@ -73,7 +73,8 @@ function filtrar() {
       const precio = parseFloat(document.getElementById("precio").value);
       const modalidad = document.getElementById("modalidad").value;
       const clasificacion = document.getElementById("clasificacion").value;
-      const mecanica = document.getElementById("mecanica").value;
+      <!-- const mecanica = document.getElementById("mecanica").value; -->
+      const mecanica = document.getElementById("mecanica").value.toLowerCase();
   const edadExacta = parseInt(document.getElementById("edadExacta").value);
   const duracionExacta = parseInt(document.getElementById("duracionExacta").value);
   const jugadoresExactos = parseInt(document.getElementById("jugadoresExactos").value);
@@ -101,7 +102,8 @@ function filtrar() {
         const matchPrecio = isNaN(precio) || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
-        const matchMecanica = !mecanica || (j["Mecánica principal"]?.trim() === mecanica.trim());
+        <!-- const matchMecanica = !mecanica || (j["Mecanica"]?.trim() === mecanica.trim()); -->
+        const matchMecanica = !mecanica || j.Mecanica.toLowerCase().includes(mecanica);
 	const matchAnio = isNaN(anio) || parseInt(j.Año) === anio;
 	const matchAutores = !autores || j.Autores.toLowerCase().includes(autores);
 	const matchIdioma = !idioma || j.Idioma.toLowerCase().includes(idioma);
@@ -159,7 +161,7 @@ function filtrar() {
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <p class="descripcion">${j["Descripción"]}</p>
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
-  <p><strong>Mecánica:</strong> ${j["Mecánica principal"]}</p>
+  <p><strong>Mecánica:</strong> ${j["Mecanica"]}</p>
   <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
   <p><strong>Duración:</strong> ${j["Duración mínima"]}-${j["Duración máxima"]} min</p>
   <p><strong>Jugadores:</strong> ${j["Jugadores mínimos"]}-${j["Jugadores máximos"]}</p>
