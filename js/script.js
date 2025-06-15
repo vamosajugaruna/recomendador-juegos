@@ -199,3 +199,83 @@ function toggleAvanzados() {
     zona.style.display = "none";
   }
 }
+
+function sorprendeme() {
+  const nombre = document.getElementById("nombre").value.toLowerCase();
+  const tipo = document.getElementById("tipo").value.toLowerCase();
+  const edad = parseInt(document.getElementById("edad").value);
+  const edadMax = parseInt(document.getElementById("edadMax").value);
+  const duracionMin = parseInt(document.getElementById("duracionMin").value);
+  const duracionMax = parseInt(document.getElementById("duracionMax").value);
+  const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
+  const jugadoresMax = parseInt(document.getElementById("jugadoresMax").value);
+  const editorial = document.getElementById("editorial").value;
+  const precio = parseFloat(document.getElementById("precio").value);
+  const modalidad = document.getElementById("modalidad").value;
+  const clasificacion = document.getElementById("clasificacion").value;
+  const mecanica = document.getElementById("mecanica").value.toLowerCase();
+  const edadExacta = parseInt(document.getElementById("edadExacta").value);
+  const duracionExacta = parseInt(document.getElementById("duracionExacta").value);
+  const jugadoresExactos = parseInt(document.getElementById("jugadoresExactos").value);
+  const anio = parseInt(document.getElementById("anio").value);
+  const autores = document.getElementById("autores").value.toLowerCase();
+  const idioma = document.getElementById("idioma").value.toLowerCase();
+
+  // Filtro igual al de filtrar()
+  const filtrados = juegos.filter(j => {
+    const matchNombre = !nombre || j.Nombre.toLowerCase().includes(nombre);
+    const edadJuego = parseInt(j["Edad mínima"]);
+    const duracionJuegoMin = parseInt(j["Duración mínima"]);
+    const duracionJuegoMax = parseInt(j["Duración máxima"]);
+    const jugadoresJuegoMin = parseInt(j["Jugadores mínimos"]);
+    const jugadoresJuegoMax = parseInt(j["Jugadores máximos"]);
+    const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
+    const matchTipo = !tipo || j.Tipo.toLowerCase().includes(tipo);
+    const matchEdad = !edad || edadJuego >= edad;
+    const matchEdadMax = !edadMax || edadJuego <= edadMax;
+    const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
+    const matchDuracionMax = !duracionMax || (!isNaN(duracionJuegoMax) && duracionJuegoMax === duracionMax);
+    const matchJugadoresMin = isNaN(jugadoresMin) || (!isNaN(jugadoresJuegoMin) && jugadoresJuegoMin === jugadoresMin);
+    const matchJugadoresMax = isNaN(jugadoresMax) || (!isNaN(jugadoresJuegoMax) && jugadoresJuegoMax === jugadoresMax);
+    const matchEditorial = !editorial || j.Editorial === editorial;
+    const matchPrecio = isNaN(precio) || precioJuego <= precio;
+    const matchModalidad = !modalidad || j.Modalidad === modalidad;
+    const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
+    const matchMecanica = !mecanica || j.Mecanica.toLowerCase().includes(mecanica);
+    const matchAnio = isNaN(anio) || parseInt(j.Año) === anio;
+    const matchAutores = !autores || j.Autores.toLowerCase().includes(autores);
+    const matchIdioma = !idioma || j.Idioma.toLowerCase().includes(idioma);
+
+    return matchNombre &&
+      matchTipo &&
+      matchEdad &&
+      matchEdadMax &&
+      matchDuracionMin &&
+      matchDuracionMax &&
+      matchJugadoresMin &&
+      matchJugadoresMax &&
+      matchEditorial &&
+      matchPrecio &&
+      matchModalidad &&
+      matchClasificacion &&
+      matchMecanica &&
+      matchAnio &&
+      matchAutores &&
+      matchIdioma &&
+      (isNaN(edadExacta) || edadJuego === edadExacta) &&
+      (isNaN(duracionExacta) || duracionJuegoMin <= duracionExacta && duracionJuegoMax >= duracionExacta) &&
+      (isNaN(jugadoresExactos) || (jugadoresJuegoMin <= jugadoresExactos && jugadoresJuegoMax >= jugadoresExactos));
+  });
+
+  if (filtrados.length === 0) {
+    document.getElementById("contador").textContent = "⚠️ No se encontraron juegos con esos criterios.";
+    document.getElementById("resultados").innerHTML = "";
+    return;
+  }
+
+  // Elegir uno aleatorio
+  const aleatorio = filtrados[Math.floor(Math.random() * filtrados.length)];
+  mostrarJuegos([aleatorio]);
+  document.getElementById("contador").textContent = "🎁 Juego aleatorio sugerido:";
+}
+
