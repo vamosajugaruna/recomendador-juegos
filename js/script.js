@@ -92,7 +92,7 @@ function filtrar() {
         const matchPrecio = isNaN(precio) || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
-        const matchMecanica = !mecanica || j.Tipo.toLowerCase().includes(mecanica);
+        const matchMecanica = !mecanica || j.Mecanica.toLowerCase().includes(mecanica);
 	const matchAnio = isNaN(anio) || parseInt(j.Año) === anio;
 	const matchAutores = !autores || j.Autores.toLowerCase().includes(autores);
 	const matchIdioma = !idioma || j.Idioma.toLowerCase().includes(idioma);
