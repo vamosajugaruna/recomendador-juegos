@@ -170,3 +170,12 @@ document.querySelectorAll(".filtros input, .filtros select").forEach(el => {
     }
   });
 });
+
+function toggleAvanzados() {
+  const zona = document.getElementById("filtros-avanzados");
+  if (zona.style.display === "none") {
+    zona.style.display = "block";
+  } else {
+    zona.style.display = "none";
+  }
+}

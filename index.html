@@ -72,6 +72,34 @@
 <label>Precio máximo (€):<input id="precio" step="0.01" type="number"/></label>
 </div>
 
+<!-- Botón para mostrar/ocultar filtros avanzados -->
+<div class="fila">
+  <button onclick="toggleAvanzados()" class="avanzados-toggle">🔽 Más filtros</button>
+</div>
+
+<!-- Contenedor oculto de filtros avanzados -->
+<div id="filtros-avanzados" style="display: none; margin-top: 1rem;">
+  <div class="fila">
+    <div>
+      <label for="anio">Año de publicación:</label>
+      <input type="number" id="anio" min="1900" max="2100" />
+    </div>
+    <div>
+      <label for="autores">Autor(es):</label>
+      <input type="text" id="autores" />
+    </div>
+    <div>
+      <label for="idioma">Idioma:</label>
+      <select id="idioma">
+        <option value="">(Cualquiera)</option>
+        <option value="ES">Español</option>
+        <option value="EN">Inglés</option>
+        <option value="Multi">Multilenguaje</option>
+      </select>
+    </div>
+  </div>
+</div>
+
 <div class="fila botones-centradas">
   <button onclick="filtrar()">Filtrar</button>
   <button onclick="resetearFiltros()">Resetear</button>
