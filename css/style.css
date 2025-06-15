@@ -190,18 +190,8 @@ body.dark-mode .bgg-link {
   text-decoration: none;
 }
 
+/* ⭐ Alta valoración */
 .badge-estrella {
-  display: inline-block;
-  background: gold;
-  color: #000;
-  font-weight: bold;
-  font-size: 0.85rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  margin: 0.5rem 0;
-}
-
-.badge-spiel {
   display: inline-block;
   background: #f1c40f;
   color: #000;
@@ -212,10 +202,11 @@ body.dark-mode .bgg-link {
   margin: 0.5rem 0;
 }
 
-.badge-viral {
+/* 🏆 Spiel des Jahres */
+.badge-spiel {
   display: inline-block;
-  background: #e74c3c;
-  color: #000;
+  background: #2980b9;
+  color: white;
   font-weight: bold;
   font-size: 0.85rem;
   padding: 0.2rem 0.5rem;
@@ -223,10 +214,23 @@ body.dark-mode .bgg-link {
   margin: 0.5rem 0;
 }
 
+/* 🔥 Viral */
+.badge-viral {
+  display: inline-block;
+  background: #f39c12 ;
+  color: white;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+}
+
+/* 🎯 Favorito del canal */
 .badge-favorito {
   display: inline-block;
-  background: #f39c91;
-  color: #000;
+  background: #8e44ad;
+  color: white;
   font-weight: bold;
   font-size: 0.85rem;
   padding: 0.2rem 0.5rem;
