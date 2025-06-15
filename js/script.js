@@ -212,9 +212,14 @@ function exportarPDF() {
     filename: 'juegos_filtrados.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
   };
 
+  contenedor.style.position = 'fixed';
+  contenedor.style.top = '0';
+  contenedor.style.left = '0';
+  contenedor.style.width = '100vw';
+  contenedor.style.zIndex = '-1';
   html2pdf().set(opciones).from(copia).save().then(() => {
     document.body.removeChild(contenedor);
   });
