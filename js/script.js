@@ -150,7 +150,7 @@ function filtrar() {
         return `
 <div class="juego">
   <strong>${j.Nombre}</strong><br>
-  ${j["Alta valoración"] === "Si" ? `<span class="badge-estrella">⭐ Alta valoración en BGG</span>` : ''} ${j["Spiel"] === "Si" ? `<span class="badge-spiel">🏆 Premio Spiel des Jahres</span>` : ''} ${j["Viral"] === "Si" ? `<span class="badge-viral">🔥 Juego viral</span>` : ''} ${j["Favorito"] === "Si" ? `<span class="badge-favorito">🎯 Favorito del canal</span>` : ''}
+  ${j["Alta valoración"] === "Si" ? `<span class="badge badge-estrella" data-filtro="Alta valoración" data-valor="Si">⭐ Alta valoración en BGG</span>` : ''} ${j["Spiel"] === "Si" ? `<span class="badge badge-spiel" data-filtro="Spiel" data-valor="Si">🏆 Premio Spiel des Jahres</span>` : ''} ${j["Viral"] === "Si" ? `<span class="badge badge-viral" data-filtro="Viral" data-valor="Si">🔥 Juego viral</span>` : ''} ${j["Favorito"] === "Si" ? `<span class="badge badge-favorito" data-filtro="Favorito" data-valor="Si">🎯 Favorito del canal</span>` : ''}
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <div class="tags-contenedor">
     ${j.Tipo.split('+').map(t => `<span class="tag tag-tipo" data-filtro="tipo" data-valor="${t.trim()}">${t.trim()}</span>`).join('')}
@@ -280,7 +280,7 @@ function sorprendeme() {
 }
 
 document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("tag")) {
+  if (e.target.classList.contains("tag") || e.target.classList.contains("badge")) {
     const filtro = e.target.getAttribute("data-filtro");
     const valor = e.target.getAttribute("data-valor");
 
