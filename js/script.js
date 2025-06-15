@@ -295,7 +295,10 @@ document.addEventListener("click", function (e) {
         }
 } else {
   // Filtrar manualmente para badges especiales
-  juegos = juegos.filter(j => j[filtro] === valor);
+  const filtrados = juegos.filter(j => j[filtro] === valor);
+mostrarJuegos(filtrados);
+document.getElementById("contador").textContent = `🎯 Juegos encontrados con ${filtro}: ${filtrados.length}`;
+
 }
 
     // Aplicar el filtro
