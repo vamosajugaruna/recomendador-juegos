@@ -292,6 +292,5 @@ document.addEventListener("click", function (e) {
     }
 
     filtrar();
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 });
