@@ -190,37 +190,3 @@ function toggleAvanzados() {
     zona.style.display = "none";
   }
 }
-function exportarPDF() {
-  const resultados = document.getElementById("resultados");
-  if (!resultados || resultados.innerHTML.trim() === "") {
-    alert("No hay resultados para exportar.");
-    return;
-  }
-
-  // Crear copia limpia del contenido
-  const copia = resultados.cloneNode(true);
-  copia.classList.add("pdf-export");
-
-  // Crear contenedor temporal
-  const contenedor = document.createElement("div");
-  contenedor.appendChild(copia);
-  document.body.appendChild(contenedor);
-
-  // Opciones de exportación
-  const opciones = {
-    margin: 0.5,
-    filename: 'juegos_filtrados.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-  };
-
-  contenedor.style.position = 'fixed';
-  contenedor.style.top = '0';
-  contenedor.style.left = '0';
-  contenedor.style.width = '100vw';
-  contenedor.style.zIndex = '-1';
-  html2pdf().set(opciones).from(copia).save().then(() => {
-    document.body.removeChild(contenedor);
-  });
-}
