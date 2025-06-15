@@ -309,7 +309,9 @@ body.dark-mode .bgg-link {
 
 .tag.activo,
 .badge.activo {
-  outline: 2px solid #2ecc71;
-  outline-offset: 2px;
-  box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+  border: 2px solid #2ecc71;
+  background-color: #eafaf1;
+  color: #145a32;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
 }
+
