@@ -285,10 +285,3 @@ body.dark-mode .bgg-link {
   background: #95a5a6;
   color: white;
 }
-
-/* Modo oscuro */
-body.dark-mode .tag {
-  background: #333;
-  color: #eee;
-}
-
