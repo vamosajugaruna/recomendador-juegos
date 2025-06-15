@@ -164,6 +164,9 @@ function filtrar() {
   <p><strong>Editorial:</strong> ${j.Editorial}</p>
   <p><strong>Modalidad:</strong> ${j.Modalidad}</p>
   <p><strong>Clasificación:</strong> ${j["Clasificación"]}</p>
+  <p><strong>Año de publicación:</strong> ${j["Año"]}</p>
+  <p><strong>Autores:</strong> ${j["Autores"]}</p>
+  <p><strong>Idiomas:</strong> ${j["Idioma"]}</p>
   <p><strong>Precio:</strong> ${isNaN(precio) ? '' : precio.toFixed(2) + ' €'}</p>
 </div>
 `;
