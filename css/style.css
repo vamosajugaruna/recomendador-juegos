@@ -186,4 +186,6 @@ body.dark-mode .descripcion {
 }
 body.dark-mode .bgg-link {
   color: #e74c3c;
+  font-weight: bold;
+  text-decoration: none;
 }
