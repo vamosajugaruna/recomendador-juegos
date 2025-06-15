@@ -237,3 +237,47 @@ body.dark-mode .bgg-link {
   border-radius: 6px;
   margin: 0.5rem 0;
 }
+
+.tags-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.6rem 0;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background-color: #eee;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Colores diferenciados */
+.tag-tipo {
+  background: #d6eaf8;
+  color: #154360;
+}
+
+.tag-idioma {
+  background: #fdebd0;
+  color: #7e5109;
+}
+
+.tag-modalidad {
+  background: #d5f5e3;
+  color: #145a32;
+}
+
+.tag-clasificacion {
+  background: #f9e79f;
+  color: #7d6608;
+}
+
+/* Modo oscuro */
+body.dark-mode .tag {
+  background: #333;
+  color: #eee;
+}
