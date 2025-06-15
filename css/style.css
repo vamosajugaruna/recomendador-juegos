@@ -276,8 +276,19 @@ body.dark-mode .bgg-link {
   color: #7d6608;
 }
 
+.tag-mecanica {
+  background: #1abc9c;
+  color: white;
+}
+
+.tag-editorial {
+  background: #95a5a6;
+  color: white;
+}
+
 /* Modo oscuro */
 body.dark-mode .tag {
   background: #333;
   color: #eee;
 }
+
