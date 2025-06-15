@@ -40,19 +40,19 @@ const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaD
       const modalidadSelect = document.getElementById("modalidad");
       const clasificacionSelect = document.getElementById("clasificacion");
       const editorialSelect = document.getElementById("editorial");
-      const mecanicaSelect = document.getElementById("mecanica");
+      <!-- const mecanicaSelect = document.getElementById("mecanica"); -->
 
       <!-- const tipos = [...new Set(juegos.map(j => j.Tipo))].sort(); -->
       const modalidades = [...new Set(juegos.map(j => j.Modalidad))].sort();
       const clasificaciones = [...new Set(juegos.map(j => j["Clasificación"]))].sort();
       const editoriales = [...new Set(juegos.map(j => j.Editorial))].sort();
-      const mecanicas = [...new Set(juegos.map(j => j["Mecánica principal"]))].sort();
+      <!-- const mecanicas = [...new Set(juegos.map(j => j["Mecánica principal"]))].sort(); -->
 
       <!-- tipoSelect.innerHTML = `<option value="">(Cualquiera)</option>` + tipos.map(t => `<option value="${t}">${t}</option>`).join(''); -->
       modalidadSelect.innerHTML = `<option value="">(Cualquiera)</option>` + modalidades.map(m => `<option value="${m}">${m}</option>`).join('');
       clasificacionSelect.innerHTML = `<option value="">(Cualquiera)</option>` + clasificaciones.map(c => `<option value="${c}">${c}</option>`).join('');
       editorialSelect.innerHTML = `<option value="">(Cualquiera)</option>` + editoriales.map(e => `<option value="${e}">${e}</option>`).join('');
-      mecanicaSelect.innerHTML = `<option value="">(Cualquiera)</option>` + mecanicas.map(m => `<option value="${m}">${m}</option>`).join('');
+      <!-- mecanicaSelect.innerHTML = `<option value="">(Cualquiera)</option>` + mecanicas.map(m => `<option value="${m}">${m}</option>`).join(''); -->
     }
 
     function resetearFiltros() {
