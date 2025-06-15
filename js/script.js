@@ -154,9 +154,9 @@ function filtrar() {
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <div class="tags-contenedor">
     ${j.Tipo.split('+').map(t => `<span class="tag tag-tipo">${t.trim()}</span>`).join('')}
-    ${j.Mecanica.split('+').map(t => `<span class="tag tag-tipo">${t.trim()}</span>`).join('')}
+    ${j.Mecanica.split('+').map(t => `<span class="tag tag-mecanica">${t.trim()}</span>`).join('')}
     ${j.Idioma.split('+').map(i => `<span class="tag tag-idioma">${i.trim()}</span>`).join('')}
-    ${j.Editorial.split('+').map(i => `<span class="tag tag-idioma">${i.trim()}</span>`).join('')}
+    ${j.Editorial.split('+').map(i => `<span class="tag tag-editorial">${i.trim()}</span>`).join('')}
     ${j.Modalidad ? `<span class="tag tag-modalidad">${j.Modalidad}</span>` : ''}
     ${j["Clasificación"] ? `<span class="tag tag-clasificacion">${j["Clasificación"]}</span>` : ''}
   </div>
