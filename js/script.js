@@ -153,12 +153,12 @@ function filtrar() {
   ${j["Alta valoración"] === "Si" ? `<span class="badge-estrella">⭐ Alta valoración en BGG</span>` : ''} ${j["Spiel"] === "Si" ? `<span class="badge-spiel">🏆 Premio Spiel des Jahres</span>` : ''} ${j["Viral"] === "Si" ? `<span class="badge-viral">🔥 Juego viral</span>` : ''} ${j["Favorito"] === "Si" ? `<span class="badge-favorito">🎯 Favorito del canal</span>` : ''}
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <div class="tags-contenedor">
-    ${j.Tipo.split('+').map(t => `<span class="tag tag-tipo">${t.trim()}</span>`).join('')}
-    ${j.Mecanica.split('+').map(t => `<span class="tag tag-mecanica">${t.trim()}</span>`).join('')}
-    ${j.Idioma.split('+').map(i => `<span class="tag tag-idioma">${i.trim()}</span>`).join('')}
-    ${j.Editorial.split('+').map(i => `<span class="tag tag-editorial">${i.trim()}</span>`).join('')}
-    ${j.Modalidad ? `<span class="tag tag-modalidad">${j.Modalidad}</span>` : ''}
-    ${j["Clasificación"] ? `<span class="tag tag-clasificacion">${j["Clasificación"]}</span>` : ''}
+    ${j.Tipo.split('+').map(t => `<span class="tag tag-tipo" data-filtro="tipo" data-valor="${t.trim()}">${t.trim()}</span>`).join('')}
+    ${j.Mecanica.split('+').map(t => `<span class="tag tag-mecanica" data-filtro="mecanica" data-valor="${t.trim()}">${t.trim()}</span>`).join('')}
+    ${j.Idioma.split('+').map(i => `<span class="tag tag-idioma" data-filtro="idioma" data-valor="${i.trim()}">${i.trim()}</span>`).join('')}
+    ${j.Editorial.split('+').map(i => `<span class="tag tag-editorial" data-filtro="editorial" data-valor="${i.trim()}">${i.trim()}</span>`).join('')}
+    ${j.Modalidad ? `<span class="tag tag-modalidad" data-filtro="modalidad" data-valor="${j.Modalidad}">${j.Modalidad}</span>` : ''}
+    ${j["Clasificación"] ? `<span class="tag tag-clasificacion" data-filtro="clasificacion" data-valor="${j["Clasificación"]}">${j["Clasificación"]}</span>` : ''}
   </div>
   <p class="descripcion">${j["Descripción"]}</p>
   ${j.BGG ? `<p><a href="https://boardgamegeek.com/boardgame/${j.BGG}" target="_blank" class="bgg-link">🔗 Ver en BGG</a></p>` : ''}
@@ -279,3 +279,19 @@ function sorprendeme() {
   document.getElementById("contador").textContent = "🎁 Juego aleatorio sugerido:";
 }
 
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("tag")) {
+    const filtro = e.target.getAttribute("data-filtro");
+    const valor = e.target.getAttribute("data-valor");
+
+    const input = document.getElementById(filtro);
+    if (input && input.tagName === "SELECT") {
+      input.value = valor;
+    } else if (input && input.tagName === "INPUT") {
+      input.value = valor;
+    }
+
+    filtrar();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
