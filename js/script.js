@@ -36,16 +36,23 @@ const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaD
     }
 
     function rellenarFiltros() {
+      <!-- const tipoSelect = document.getElementById("tipo"); -->
       const modalidadSelect = document.getElementById("modalidad");
       const clasificacionSelect = document.getElementById("clasificacion");
       const editorialSelect = document.getElementById("editorial");
+      const mecanicaSelect = document.getElementById("mecanica");
+
+      <!-- const tipos = [...new Set(juegos.map(j => j.Tipo))].sort(); -->
       const modalidades = [...new Set(juegos.map(j => j.Modalidad))].sort();
       const clasificaciones = [...new Set(juegos.map(j => j["Clasificación"]))].sort();
       const editoriales = [...new Set(juegos.map(j => j.Editorial))].sort();
+      const mecanicas = [...new Set(juegos.map(j => j["Mecánica principal"]))].sort();
 
+      <!-- tipoSelect.innerHTML = `<option value="">(Cualquiera)</option>` + tipos.map(t => `<option value="${t}">${t}</option>`).join(''); -->
       modalidadSelect.innerHTML = `<option value="">(Cualquiera)</option>` + modalidades.map(m => `<option value="${m}">${m}</option>`).join('');
       clasificacionSelect.innerHTML = `<option value="">(Cualquiera)</option>` + clasificaciones.map(c => `<option value="${c}">${c}</option>`).join('');
       editorialSelect.innerHTML = `<option value="">(Cualquiera)</option>` + editoriales.map(e => `<option value="${e}">${e}</option>`).join('');
+      mecanicaSelect.innerHTML = `<option value="">(Cualquiera)</option>` + mecanicas.map(m => `<option value="${m}">${m}</option>`).join('');
     }
 
     function resetearFiltros() {
@@ -54,6 +61,7 @@ const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaD
 }
 
 function filtrar() {
+      <!-- const tipo = document.getElementById("tipo").value; -->
       const tipo = document.getElementById("tipo").value.toLowerCase();
       const edad = parseInt(document.getElementById("edad").value);
       const edadMax = parseInt(document.getElementById("edadMax").value);
@@ -65,7 +73,7 @@ function filtrar() {
       const precio = parseFloat(document.getElementById("precio").value);
       const modalidad = document.getElementById("modalidad").value;
       const clasificacion = document.getElementById("clasificacion").value;
-      const mecanica = document.getElementById("mecanica").value.toLowerCase();
+      const mecanica = document.getElementById("mecanica").value;
   const edadExacta = parseInt(document.getElementById("edadExacta").value);
   const duracionExacta = parseInt(document.getElementById("duracionExacta").value);
   const jugadoresExactos = parseInt(document.getElementById("jugadoresExactos").value);
@@ -81,6 +89,7 @@ function filtrar() {
         const jugadoresJuegoMax = parseInt(j["Jugadores máximos"]);
         const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
 
+        <!-- const matchTipo = !tipo || j.Tipo === tipo; -->
 	const matchTipo = !tipo || j.Tipo.toLowerCase().includes(tipo);
         const matchEdad = !edad || edadJuego >= edad;
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
@@ -92,7 +101,7 @@ function filtrar() {
         const matchPrecio = isNaN(precio) || precioJuego <= precio;
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
-        const matchMecanica = !mecanica || j.Mecanica.toLowerCase().includes(mecanica);
+        const matchMecanica = !mecanica || (j["Mecánica principal"]?.trim() === mecanica.trim());
 	const matchAnio = isNaN(anio) || parseInt(j.Año) === anio;
 	const matchAutores = !autores || j.Autores.toLowerCase().includes(autores);
 	const matchIdioma = !idioma || j.Idioma.toLowerCase().includes(idioma);
