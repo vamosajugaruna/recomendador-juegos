@@ -55,18 +55,19 @@ const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaD
 }
 
 function filtrar() {
-      const tipo = document.getElementById("tipo").value.toLowerCase();
-      const edad = parseInt(document.getElementById("edad").value);
-      const edadMax = parseInt(document.getElementById("edadMax").value);
-      const duracionMin = parseInt(document.getElementById("duracionMin").value);
-      const duracionMax = parseInt(document.getElementById("duracionMax").value);
-      const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
-      const jugadoresMax = parseInt(document.getElementById("jugadoresMax").value);
-      const editorial = document.getElementById("editorial").value;
-      const precio = parseFloat(document.getElementById("precio").value);
-      const modalidad = document.getElementById("modalidad").value;
-      const clasificacion = document.getElementById("clasificacion").value;
-      const mecanica = document.getElementById("mecanica").value.toLowerCase();
+  const nombre = document.getElementById("nombre").value.toLowerCase();
+  const tipo = document.getElementById("tipo").value.toLowerCase();
+  const edad = parseInt(document.getElementById("edad").value);
+  const edadMax = parseInt(document.getElementById("edadMax").value);
+  const duracionMin = parseInt(document.getElementById("duracionMin").value);
+  const duracionMax = parseInt(document.getElementById("duracionMax").value);
+  const jugadoresMin = parseInt(document.getElementById("jugadoresMin").value);
+  const jugadoresMax = parseInt(document.getElementById("jugadoresMax").value);
+  const editorial = document.getElementById("editorial").value;
+  const precio = parseFloat(document.getElementById("precio").value);
+  const modalidad = document.getElementById("modalidad").value;
+  const clasificacion = document.getElementById("clasificacion").value;
+  const mecanica = document.getElementById("mecanica").value.toLowerCase();
   const edadExacta = parseInt(document.getElementById("edadExacta").value);
   const duracionExacta = parseInt(document.getElementById("duracionExacta").value);
   const jugadoresExactos = parseInt(document.getElementById("jugadoresExactos").value);
@@ -75,14 +76,14 @@ function filtrar() {
   const idioma = document.getElementById("idioma").value.toLowerCase();
 
       const filtrados = juegos.filter(j => {
+        const matchNombre = !nombre || j.Nombre.toLowerCase().includes(nombre);
         const edadJuego = parseInt(j["Edad mínima"]);
         const duracionJuegoMin = parseInt(j["Duración mínima"]);
         const duracionJuegoMax = parseInt(j["Duración máxima"]);
         const jugadoresJuegoMin = parseInt(j["Jugadores mínimos"]);
         const jugadoresJuegoMax = parseInt(j["Jugadores máximos"]);
         const precioJuego = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
-
-	const matchTipo = !tipo || j.Tipo.toLowerCase().includes(tipo);
+	      const matchTipo = !tipo || j.Tipo.toLowerCase().includes(tipo);
         const matchEdad = !edad || edadJuego >= edad;
         const matchEdadMax = !edadMax || edadJuego <= edadMax;
         const matchDuracionMin = !duracionMin || (!isNaN(duracionJuegoMin) && duracionJuegoMin >= duracionMin);
@@ -94,11 +95,12 @@ function filtrar() {
         const matchModalidad = !modalidad || j.Modalidad === modalidad;
         const matchClasificacion = !clasificacion || j["Clasificación"] === clasificacion;
         const matchMecanica = !mecanica || j.Mecanica.toLowerCase().includes(mecanica);
-	const matchAnio = isNaN(anio) || parseInt(j.Año) === anio;
-	const matchAutores = !autores || j.Autores.toLowerCase().includes(autores);
-	const matchIdioma = !idioma || j.Idioma.toLowerCase().includes(idioma);
+	      const matchAnio = isNaN(anio) || parseInt(j.Año) === anio;
+	      const matchAutores = !autores || j.Autores.toLowerCase().includes(autores);
+	      const matchIdioma = !idioma || j.Idioma.toLowerCase().includes(idioma);
 
-        return matchTipo &&
+        return matchNombre &&
+        matchTipo &&
         matchEdad &&
         matchEdadMax &&
         matchDuracionMin &&
@@ -110,9 +112,9 @@ function filtrar() {
         matchModalidad &&
         matchClasificacion &&
         matchMecanica &&
-	matchAnio &&
-	matchAutores &&
-	matchIdioma &&	
+	      matchAnio &&
+	      matchAutores &&
+	      matchIdioma &&	
 
 
         (isNaN(edadExacta) || edadJuego === edadExacta) &&
