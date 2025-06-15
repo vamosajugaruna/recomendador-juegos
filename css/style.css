@@ -175,3 +175,15 @@ body.dark-mode .descripcion {
   background-color: #bbb;
   color: white;
 }
+
+.bgg-link {
+  color: #2980b9;
+  font-weight: bold;
+  text-decoration: none;
+}
+.bgg-link:hover {
+  text-decoration: underline;
+}
+body.dark-mode .bgg-link {
+  color: #74b9ff;
+}

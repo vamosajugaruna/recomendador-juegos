@@ -145,6 +145,7 @@ function filtrar() {
       div.innerHTML = lista.map(j => {
         const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
+        ${j.BGG ? `<p><a href="https://boardgamegeek.com/boardgame/${j.BGG}" target="_blank" class="bgg-link">🔗 Ver en BGG</a></p>` : ''}
         return `
 <div class="juego">
   <strong>${j.Nombre}</strong>
