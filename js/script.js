@@ -284,13 +284,17 @@ document.addEventListener("click", function (e) {
     const filtro = e.target.getAttribute("data-filtro");
     const valor = e.target.getAttribute("data-valor");
 
+    // Resetear todos los filtros
+    document.querySelectorAll('.filtros input, .filtros select').forEach(el => el.value = '');
+
+    // Aplicar solo el valor del tag clicado
     const input = document.getElementById(filtro);
-    if (input && input.tagName === "SELECT") {
-      input.value = valor;
-    } else if (input && input.tagName === "INPUT") {
+    if (input) {
       input.value = valor;
     }
 
+    // Aplicar el filtro
     filtrar();
   }
 });
+
