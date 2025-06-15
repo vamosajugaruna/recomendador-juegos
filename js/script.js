@@ -295,6 +295,14 @@ document.addEventListener("click", function (e) {
 
     // Aplicar el filtro
     filtrar();
+
+    // Scroll automático al contador
+    setTimeout(() => {
+      const contador = document.getElementById("contador");
+      if (contador) {
+        contador.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 150);
   }
 });
 
