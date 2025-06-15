@@ -288,10 +288,15 @@ document.addEventListener("click", function (e) {
     document.querySelectorAll('.filtros input, .filtros select').forEach(el => el.value = '');
 
     // Aplicar solo el valor del tag clicado
-    const input = document.getElementById(filtro);
-    if (input) {
-      input.value = valor;
-    }
+    if (["tipo", "mecanica", "idioma", "editorial", "modalidad", "clasificacion"].includes(filtro)) {
+      const input = document.getElementById(filtro);
+        if (input) {
+          input.value = valor;
+        }
+} else {
+  // Filtrar manualmente para badges especiales
+  juegos = juegos.filter(j => j[filtro] === valor);
+}
 
     // Aplicar el filtro
     filtrar();
