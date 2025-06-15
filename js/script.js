@@ -51,6 +51,10 @@ const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCdmX0nutLPKaD
 
     function resetearFiltros() {
   document.querySelectorAll('.filtros input, .filtros select').forEach(el => el.value = '');
+
+  // Eliminar cualquier clase .activo en tags o badges
+  document.querySelectorAll('.tag.activo, .badge.activo').forEach(el => el.classList.remove('activo'));
+  
   mostrarJuegos(juegos);
 }
 
