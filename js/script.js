@@ -303,6 +303,12 @@ document.addEventListener("click", function (e) {
       document.getElementById("contador").textContent = `🎯 Juegos encontrados con ${filtro}: ${filtrados.length}`;
     }
 
+    // Eliminar clase .activo de todos los tags y badges
+    document.querySelectorAll('.tag.activo, .badge.activo').forEach(el => el.classList.remove('activo'));
+
+    // Añadir clase .activo al elemento clicado
+    e.target.classList.add('activo');
+
     // Scroll automático a resultados
     setTimeout(() => {
       const contador = document.getElementById("contador");
