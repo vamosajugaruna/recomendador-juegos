@@ -149,7 +149,7 @@ function filtrar() {
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
         return `
 <div class="juego">
-  <strong>${j.Nombre}</strong>
+  <strong>${j.Nombre}</strong><br>
   ${j["Alta valoración"] === "Si" ? `<span class="badge-estrella">⭐ Alta valoración en BGG</span>` : ''} ${j["Spiel"] === "Si" ? `<span class="badge-spiel">🏆 Premio Spiel des Jahres</span>` : ''} ${j["Viral"] === "Si" ? `<span class="badge-viral">🔥 Juego viral</span>` : ''} ${j["Favorito"] === "Si" ? `<span class="badge-favorito">🎯 Favorito del canal</span>` : ''}  ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <p class="descripcion">${j["Descripción"]}</p>
   ${j.BGG ? `<p><a href="https://boardgamegeek.com/boardgame/${j.BGG}" target="_blank" class="bgg-link">🔗 Ver en BGG</a></p>` : ''}
