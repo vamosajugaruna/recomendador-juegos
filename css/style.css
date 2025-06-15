@@ -321,4 +321,14 @@ body.dark-mode .bgg-link {
   box-shadow: 0 0 10px rgba(46, 204, 113, 0.5) !important;
 }
 
+.badge.badge-estrella.activo,
+.badge.badge-spiel.activo,
+.badge.badge-viral.activo,
+.badge.badge-favorito.activo {
+  border: 2px solid #2ecc71 !important;
+  background-color: #eafaf1 !important;
+  color: #145a32 !important;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5) !important;
+}
+
 
