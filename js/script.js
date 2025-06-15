@@ -150,6 +150,8 @@ function filtrar() {
         return `
 <div class="juego">
   <strong>${j.Nombre}</strong><br>
+  ${j["Alta valoración"] === "Si" ? `<span class="badge-estrella">⭐ Alta valoración en BGG</span>` : ''} ${j["Spiel"] === "Si" ? `<span class="badge-spiel">🏆 Premio Spiel des Jahres</span>` : ''} ${j["Viral"] === "Si" ? `<span class="badge-viral">🔥 Juego viral</span>` : ''} ${j["Favorito"] === "Si" ? `<span class="badge-favorito">🎯 Favorito del canal</span>` : ''}
+  ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <div class="tags-contenedor">
     ${j.Tipo.split('+').map(t => `<span class="tag tag-tipo">${t.trim()}</span>`).join('')}
     ${j.Mecanica.split('+').map(t => `<span class="tag tag-tipo">${t.trim()}</span>`).join('')}
@@ -158,7 +160,6 @@ function filtrar() {
     ${j.Modalidad ? `<span class="tag tag-modalidad">${j.Modalidad}</span>` : ''}
     ${j["Clasificación"] ? `<span class="tag tag-clasificacion">${j["Clasificación"]}</span>` : ''}
   </div>
-  ${j["Alta valoración"] === "Si" ? `<span class="badge-estrella">⭐ Alta valoración en BGG</span>` : ''} ${j["Spiel"] === "Si" ? `<span class="badge-spiel">🏆 Premio Spiel des Jahres</span>` : ''} ${j["Viral"] === "Si" ? `<span class="badge-viral">🔥 Juego viral</span>` : ''} ${j["Favorito"] === "Si" ? `<span class="badge-favorito">🎯 Favorito del canal</span>` : ''}  ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <p class="descripcion">${j["Descripción"]}</p>
   ${j.BGG ? `<p><a href="https://boardgamegeek.com/boardgame/${j.BGG}" target="_blank" class="bgg-link">🔗 Ver en BGG</a></p>` : ''}
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
