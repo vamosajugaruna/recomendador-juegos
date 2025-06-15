@@ -145,12 +145,12 @@ function filtrar() {
       div.innerHTML = lista.map(j => {
         const precio = parseFloat(j["Precio"].replace(/[€\s]/g, '').replace(',', '.'));
         const imagen = j["Imagen"] ? `images/juegos/${j["Imagen"]}` : null;
-        ${j.BGG ? `<p><a href="https://boardgamegeek.com/boardgame/${j.BGG}" target="_blank" class="bgg-link">🔗 Ver en BGG</a></p>` : ''}
         return `
 <div class="juego">
   <strong>${j.Nombre}</strong>
   ${imagen ? `<img src="${imagen}" alt="${j.Nombre}" class="miniatura">` : ''}
   <p class="descripcion">${j["Descripción"]}</p>
+  ${j.BGG ? `<p><a href="https://boardgamegeek.com/boardgame/${j.BGG}" target="_blank" class="bgg-link">🔗 Ver en BGG</a></p>` : ''}
   <p><strong>Tipo:</strong> ${j.Tipo}</p>
   <p><strong>Mecánica:</strong> ${j["Mecanica"]}</p>
   <p><strong>Edad:</strong> ${j["Edad mínima"]}+</p>
