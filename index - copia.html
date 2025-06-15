@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<nav style="background-color: white; border-bottom: 1px solid #ddd; padding: 1rem 2rem; font-family: 'Poppins', sans-serif; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; font-weight: 500; font-size: 0.95rem;">
+<a href="#top" style="text-decoration: none; color: #c0392b;">Inicio</a>
+<a href="#filtros" style="text-decoration: none; color: #c0392b;">Filtrar</a>
+<a href="https://www.instagram.com/vamosajugaruna/" style="text-decoration: none; color: #c0392b;" target="_blank">Contacto</a>
+<a href="https://www.youtube.com/@vamosajugaruna" style="text-decoration: none; color: #c0392b;" target="_blank">YouTube</a>
+<button id="modoBtn" onclick="toggleDarkMode()" style="margin-left: auto; padding: 0.3rem 0.8rem; font-size: 0.85rem; cursor: pointer; border: 1px solid #c0392b; background: white; color: #c0392b; border-radius: 5px;">🌓 Modo oscuro</button>
+</nav>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recomendador de Juegos de Mesa</title>
+<!-- Vista previa al compartir (Open Graph) -->
+<meta content="Vamos a Jugar Una – Recomendador de Juegos de Mesa" property="og:title"/>
+<meta content="Filtra y encuentra el juego de mesa ideal para ti. Proyecto visual, funcional y en expansión." property="og:description"/>
+<meta content="https://vamosajugaruna.github.io/recomendador-juegos/images/logo_vamosajugaruna.png" property="og:image"/>
+<meta content="https://vamosajugaruna.github.io/recomendador-juegos/" property="og:url"/>
+<meta content="website" property="og:type"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<br>
+<body class="" id="top">
+<div style="text-align:center;"><img alt="Logo Vamos a Jugar Una" src="images/logo_vamosajugaruna.png" style="max-width: 160px; margin-bottom: 1rem;"/></div>
+<div style="text-align:center; margin-top: 0.5rem; font-size: 0.95rem;">
+<a href="https://www.youtube.com/@vamosajugaruna" style="margin: 0 15px; color: #c0392b; font-weight: bold;" target="_blank">
+<img alt="YouTube" src="images/icono_youtube.png" style="height: 20px; vertical-align: middle; margin-right: 5px;"/>
+    YouTube
+  </a>
+<a href="https://www.instagram.com/vamosajugaruna/" style="margin: 0 15px; color: #c0392b; font-weight: bold;" target="_blank">
+<img alt="Instagram" src="images/icono_instagram.png" style="height: 20px; vertical-align: middle; margin-right: 5px;"/>
+    Instagram
+  </a>
+</div>
+<h1>🎲 Recomendador de Juegos de Mesa 🎲</h1>
+<div class="filtros" id="filtros">
+
+<div class="fila">
+
+<label>Nombre:<input id="nombre" type="text"/></label>
+
+<label for="tipo">Tipo:
+      <select id="tipo">
+        <option value="">(Cualquiera)</option>
+        <option value="Familiar">Familiar</option>
+        <option value="Party">Party</option>
+        <option value="Casual">Casual</option>
+      </select>
+</label>
+
+<label for="mecanica">Mecánica:
+      <select id="mecanica">
+        <option value="">(Cualquiera)</option>
+        <option value="Gestión de mano">Gestión de mano</option>
+        <option value="Estrategia">Estrategia</option>
+      </select>
+</label>
+
+  <div class="fila">
+    <label>Ordenar por:
+      <select id="orden">
+        <option value="">(Sin orden)</option>
+        <option value="nombre">Nombre (A–Z)</option>
+        <option value="duracion">Duración</option>
+        <option value="precio">Precio</option>
+      </select>
+    </label>
+  </div></div>
+<div class="fila">
+<label>Edad mínima:<input id="edad" type="number"/></label>
+<label>Edad máxima:<input id="edadMax" type="number"/></label>
+<label>Edad exacta:<input id="edadExacta" type="number"/></label>
+</div>
+<div class="fila">
+<label>Duración mínima (min):<input id="duracionMin" type="number"/></label>
+<label>Duración máxima (min):<input id="duracionMax" type="number"/></label>
+<label>Duración exacta:<input id="duracionExacta" type="number"/></label>
+</div>
+<div class="fila">
+<label>Jugadores mínimos:<input id="jugadoresMin" type="number"/></label>
+<label>Jugadores máximos:<input id="jugadoresMax" type="number"/></label>
+<label>Jugadores exactos:<input id="jugadoresExactos" type="number"/></label>
+</div>
+<div class="fila">
+<label>Editorial:<select id="editorial"></select></label>
+<label>Modalidad:<select id="modalidad"></select></label>
+<label>Clasificación:<select id="clasificacion"></select></label>
+<label>Precio máximo (€):<input id="precio" step="0.01" type="number"/></label>
+</div>
+
+<!-- Botón para mostrar/ocultar filtros avanzados -->
+<div class="fila">
+  <button onclick="toggleAvanzados()" class="avanzados-toggle">🔽 Más filtros</button>
+</div>
+
+<!-- Contenedor oculto de filtros avanzados -->
+<div id="filtros-avanzados" style="display: none; margin-top: 1rem;">
+  <div class="fila">
+    <div>
+      <label for="anio">Año de publicación:</label>
+      <input type="number" id="anio" min="1900" max="2100" />
+    </div>
+    <div>
+      <label for="autores">Autor(es):</label>
+      <input type="text" id="autores" />
+    </div>
+    <div>
+      <label for="idioma">Idioma:</label>
+      <select id="idioma">
+        <option value="">(Cualquiera)</option>
+        <option value="Español">Español</option>
+        <option value="Inglés">Inglés</option>
+        <option value="Catalán">Catalán</option>
+	<option value="Gallego">Gallego</option>
+	<option value="Euskera">Euskera</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="fila botones-centradas">
+  <button onclick="filtrar()">Filtrar</button>
+  <button onclick="resetearFiltros()">Resetear</button>
+  <button onclick="sorprendeme()">🎁 Sorpréndeme</button>
+</div>
+
+</div>
+
+<div id="contador" style="margin-top: 2rem; font-weight: bold; font-size: 1rem;"></div>
+<div id="resultados"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
