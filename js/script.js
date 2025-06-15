@@ -197,13 +197,25 @@ function exportarPDF() {
     return;
   }
 
+  // Crear copia limpia del contenido
+  const copia = resultados.cloneNode(true);
+  copia.classList.add("pdf-export");
+
+  // Crear contenedor temporal
+  const contenedor = document.createElement("div");
+  contenedor.appendChild(copia);
+  document.body.appendChild(contenedor);
+
+  // Opciones de exportación
   const opciones = {
     margin: 0.5,
     filename: 'juegos_filtrados.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
   };
 
-  html2pdf().set(opciones).from(resultados).save();
+  html2pdf().set(opciones).from(copia).save().then(() => {
+    document.body.removeChild(contenedor);
+  });
 }
